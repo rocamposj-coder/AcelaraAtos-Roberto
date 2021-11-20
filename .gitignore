@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs
+/ArquivoTexto/obj
+/ArquivoTexto/bin/Debug/net5.0
+/Aula2Exemplo/obj
+/Aula2Exemplo/bin/Debug
+/OutroProjeto/obj
