@@ -25,6 +25,18 @@ namespace Exercicio3
         {
             Console.WriteLine($"Nome: {Nome} Idade:{Idade} Nota:{Nota} Situacao:{Situacao} Data Registro:{DataRegistro}");
         }
+
+        public void EntradaAluno()   
+        {           
+            Console.WriteLine("Digite um nome");
+            Nome = Console.ReadLine();
+            Console.WriteLine("Digite a idade");
+            Idade = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a nota");
+            Nota = int.Parse(Console.ReadLine());
+            DataRegistro = DateTime.Now;            
+        }
+
     }
 
     internal class Program
@@ -32,24 +44,13 @@ namespace Exercicio3
         const int NUM_ALUNOS = 3;
         static Aluno[] listaAlunos = new Aluno[NUM_ALUNOS];
 
-        static Aluno EntradaAluno()
-        {
-            Aluno aluno = new Aluno();
-            Console.WriteLine("Digite um nome");
-            aluno.Nome = Console.ReadLine();
-            Console.WriteLine("Digite a idade");
-            aluno.Idade = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite a nota");
-            aluno.Nota = int.Parse(Console.ReadLine());
-            aluno.DataRegistro = DateTime.Now;
-            return aluno;
-        }
+       
 
         static void EntradaMultiplos()
         {            
             for (int i = 0; i < NUM_ALUNOS; i++)
             {
-                listaAlunos[i] = EntradaAluno();
+                listaAlunos[i].EntradaAluno();
             }
         }
 
@@ -133,6 +134,13 @@ namespace Exercicio3
             double media = CalcularMedia(out maiorNota, out menorNota);
             AtualizarStatusAlunos(media);
             ListarTodosAlunos();
+
+
+
+
+
+
+
 
             /*
             //SEGUNDA VERSÂO - COM MENU
