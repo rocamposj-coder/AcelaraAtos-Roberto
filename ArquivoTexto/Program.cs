@@ -8,69 +8,46 @@ using System.Xml.Serialization;
 namespace ArquivoTexto
 {
 
-    public struct Aluno
+    public struct Externo
     {
-        //Propriedades
-        public int Id { get; set; }
-        public int Idade { get; set; }
-        public string Nome { get; set; }
-
-        //Metodos
-        public void Imp()
-        {
-            Console.WriteLine($"Id = {Id} Nome = {Nome}");
-        }
+        public string name { get; set; }
+        public string height { get; set; }
+        public string mass { get; set; }
+        public string hair_color { get; set; }
+        public string skin_color { get; set; }
+        public string eye_color { get; set; }
+        public string birth_year { get; set; }
+        public string gender { get; set; }
+        public string homeworld { get; set; }
+        public string[] films { get; set; }
+        public string[] species { get; set; }
+        public string[] vehicles { get; set; }
+        public string[] starships { get; set; }
+        public DateTime created { get; set; }
+        public DateTime edited { get; set; }
+        public string url { get; set; }
     }
+
+
 
     internal class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Arquivos");
-            Aluno alu = new Aluno();
-            alu.Id = 1;
-            alu.Idade = 25;
-            alu.Nome = "Ryu";
-
-            Aluno alu2 = new Aluno();
-            alu2.Id = 1;
-            alu2.Idade = 25;
-            alu2.Nome = "Ken";
-
-            Aluno alu3 = new Aluno();
-            alu3.Id = 1;
-            alu3.Idade = 25;
-            alu3.Nome = "Blanka";
-
-            List<Aluno> alunos = new List<Aluno>();
-            alunos.Add(alu);
-            alunos.Add(alu2);
-            alunos.Add(alu3);
-
-
-            SalvarArquivoTexto("C://NOVO/alunos.txt", alunos);
-
-            List<Aluno> listaRetorno = LerArquivoTexto("C://NOVO/alunos.txt");
+            Externo dadosJson = LerArquivoTexto("C://NOVO/externo.json");
 
         }
 
-
-        static void SalvarArquivoTexto(string caminho, List<Aluno> listaAlunos)
+        static Externo LerArquivoTexto(string caminho)
         {
-            StreamWriter sw = new StreamWriter(caminho);
-            string jsonString = JsonSerializer.Serialize(listaAlunos);
-            sw.Write(jsonString);
-            sw.Close();
-        }
-
-
-        static List<Aluno> LerArquivoTexto(string caminho)
-        {
-            List<Aluno> listaAlunos = new List<Aluno>();
             StreamReader sr = new StreamReader(caminho);
             string json = sr.ReadToEnd();
-            listaAlunos = JsonSerializer.Deserialize<List<Aluno>>(json);
-            return listaAlunos;
+            Externo objeto = JsonSerializer.Deserialize<Externo>(json);
+
+            Console.WriteLine(objeto.name);
+
+            return objeto;
         }
     }
 }
