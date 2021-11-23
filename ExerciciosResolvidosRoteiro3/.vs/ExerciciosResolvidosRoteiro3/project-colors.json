@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "80a1954f-7324-4e29-821b-18c21791739e": {
+      "ProjectGuid": "80a1954f-7324-4e29-821b-18c21791739e",
+      "DisplayName": "ExerciciosResolvidosRoteiro3",
+      "ColorIndex": 0
+    },
+    "d4e2d87e-e9c1-40c4-93c1-f74ef38e1232": {
+      "ProjectGuid": "d4e2d87e-e9c1-40c4-93c1-f74ef38e1232",
+      "DisplayName": "Exercicio3",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

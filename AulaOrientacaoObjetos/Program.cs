@@ -2,6 +2,11 @@
 
 namespace OutroProjeto
 {
+    class Endereco
+    {
+        public int Numero { get; set; }
+        public string Logradouro { get; set; }
+    }
 
     class Pessoa
     {
@@ -11,13 +16,22 @@ namespace OutroProjeto
         public string Nome { get => nome; set => nome = value; }
         public string Cpf { get => cpf; set => cpf = value; }
         public string Telefone { get => telefone; set => telefone = value; }
+        public Endereco Endereco { get; set; }
+
+
+        public override string ToString()
+        {            
+            return $"{Nome} {Cpf} {Telefone}";
+        }
+
 
         public Pessoa(string nome)
         {
+            this.nome = nome;
             Console.WriteLine("Construtor PAI com parametros " + nome);
             
         }
-
+        
         
         public Pessoa()
         {
@@ -63,9 +77,7 @@ namespace OutroProjeto
         public string[] DisciplinasMinistradas { get => disciplinasMinistradas; set => disciplinasMinistradas = value; }
 
         public Instrutor(string nome):base(nome)
-        {
-            
-            this.Nome = nome;
+        {   
             Console.WriteLine("Construtor Instrutor " + nome);
         }
 
@@ -88,7 +100,11 @@ namespace OutroProjeto
             alu.Cpf = "000.000.001-91";
             alu.Telefone = "(35) 99998-9899";
             alu.DisiciplinasCursadas = new string[] { "DotNet", "Java", "SQL", "GIT" };
+            alu.Endereco.Numero = 64;
+            
             alu.Exibir();
+
+            alu.ToString();
 
             Instrutor instrutor = new Instrutor("Leonardo Dicaprio");
             //instrutor.Nome = "Leonardo Dicaprio";
