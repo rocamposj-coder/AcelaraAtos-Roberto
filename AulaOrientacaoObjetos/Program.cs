@@ -8,7 +8,7 @@ namespace OutroProjeto
         public string Logradouro { get; set; }
     }
 
-    class Pessoa
+    abstract class Pessoa
     {
         private string nome;
         private string cpf;
@@ -88,6 +88,9 @@ namespace OutroProjeto
         }
 
     }
+
+
+
 
 
     internal class Program

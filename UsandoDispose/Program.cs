@@ -10,7 +10,7 @@ namespace UsandoDispose
         string Telefone { get; set; }
     }
 
-    class Pessoa : IDisposable, IPessoa
+    class Pessoa : IPessoa, IDisposable
     {
         private string nome;
         private string cpf;
@@ -32,35 +32,29 @@ namespace UsandoDispose
             Console.WriteLine("Construtor PAI sem parametros");
         }
 
-        public virtual void Exibir() //Este é o metodo genérico
-        {            
-            Console.WriteLine($"{Nome} {Cpf} {Telefone}");
-        }
-
+       
+        
         public void Dispose()
         {
             Console.WriteLine("Finalizando o objeto");
         }
+        
     }
 
 
     internal class Program
     {
         static void Main(string[] args)
-        {
-            Pessoa.alo = 10;
-
-           
+        {            
             using (Pessoa pessoa = new Pessoa("Roberto"))
             {
-                
                 Console.WriteLine("Executando enquanto o objeto existe");
             }
 
-
-                //pessoa.Dispose(); //posso me escquecer de chamar
-
-               
+            /*
+            Pessoa pessoa = new Pessoa("Roberto");            
+            pessoa.Dispose(); //posso me escquecer de chamar
+            */
         }
     }
 }

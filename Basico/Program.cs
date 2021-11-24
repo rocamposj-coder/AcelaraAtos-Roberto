@@ -27,10 +27,12 @@ namespace Basico
 
     }
 
+
     internal class Program
     {
         static void Main(string[] args)
         {
+
             Aluno alu;
             alu = new Aluno(); //Construtor
             alu.Num = 13;
@@ -38,6 +40,8 @@ namespace Basico
             alu.Num2 = 180;
 
             Console.WriteLine("Hello World!");
+
+            
         }
     }
 }
