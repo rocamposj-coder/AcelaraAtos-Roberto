@@ -3,7 +3,7 @@
 namespace Generics3
 {
     public class Generica<T> //É possivel ter mais de um tipo genérico                             
-        where T : IPessoa
+        where T : IPessoa        
     {
 
         public void Exibir(T entidade)

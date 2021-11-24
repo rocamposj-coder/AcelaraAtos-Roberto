@@ -12,7 +12,7 @@ namespace ComparandoObjetos
             this.Nome = nome;
         }
 
-        /*
+
         public static bool operator ==(Pessoa a, Pessoa b)
         {
             if (a.Nome.CompareTo(b.Nome) == 0)
@@ -30,7 +30,7 @@ namespace ComparandoObjetos
             }
             return false;
         }
-        */
+
     }
 
     internal class Program

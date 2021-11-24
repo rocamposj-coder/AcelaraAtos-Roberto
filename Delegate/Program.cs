@@ -31,11 +31,10 @@ namespace ConsoleApplication2
 
 
             // Instancia o delegate com um metodo: (desta forma é possivel passar um método como parametro ..)
-            DelegateOperacao maCubo = Cubo;
+            ma = Cubo;
             // Chamando o delegate ma:
-            double resultadoCubo = maCubo(2);
+            double resultadoCubo = ma(2);
             Console.WriteLine("Cubo: {0}", resultadoCubo);
-
 
 
             // Instanciando um delegate com um método anonimo:

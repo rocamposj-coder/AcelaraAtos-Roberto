@@ -7,6 +7,9 @@ namespace EventosEDelegate
     {
         public int Vagas { get; set; }
         private int vagasEmUso = 0;
+        //Assinatura do evento... (delegate)
+        public event EventHandler TreinamentoLotadoEvent;
+
 
         public Treinamento(int vagas)
         {
@@ -29,8 +32,7 @@ namespace EventosEDelegate
             }
         }
 
-        //Assinatura do evento... (delegate)
-        public event EventHandler TreinamentoLotadoEvent;
+        
 
         protected virtual void AoEncherTreinamento(EventArgs e)
         {
@@ -58,8 +60,8 @@ namespace EventosEDelegate
         static void AoEncherTreinamento(Object sender, EventArgs e)
         {
             Console.WriteLine("Sala Lotada");
-        }
+        }       
 
-       
+
     }
 }

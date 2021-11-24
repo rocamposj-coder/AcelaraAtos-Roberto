@@ -6,6 +6,7 @@ namespace Generics
     {
         public void Metodo(T objetoTipo)
         {
+            Console.WriteLine(objetoTipo.GetType());
             Console.WriteLine(objetoTipo.ToString());
         }
     }

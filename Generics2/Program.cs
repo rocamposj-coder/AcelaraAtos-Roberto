@@ -26,9 +26,10 @@ namespace Generics2
 
             Generica<Pessoa> a = new Generica<Pessoa>();
             a.Salvar(pessoa);
-            
 
-             
+            Generica<Treinamento> t = new Generica<Treinamento>();
+            t.Salvar(treinamento);
+
         }
     }
 }
