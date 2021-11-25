@@ -14,6 +14,10 @@ using System.Threading.Tasks;
  https://docs.microsoft.com/pt-br/dotnet/framework/data/adonet/ado-net-code-examples#sqlclient
 
 
+    DBCommand
+    https://docs.microsoft.com/pt-br/dotnet/api/system.data.common.dbcommand?view=net-6.0
+    SqlCommand
+    https://docs.microsoft.com/pt-br/dotnet/api/system.data.sqlclient.sqlcommand?view=dotnet-plat-ext-6.0
     
  */
 
@@ -38,6 +42,7 @@ namespace AcessoBancoDados
                     {
                         comando.CommandType = CommandType.Text;
                         comando.CommandText = $@"SELECT * from Alunos";
+                                                
 
                         using (IDataReader reader = comando.ExecuteReader())
                         {
@@ -61,6 +66,72 @@ namespace AcessoBancoDados
 
                         }
                     }
+
+                    conexao.Close(); //Da para abrir novamente
+                    //conexao.Dispose(); //nao pode abrir novamente.
+                    //Nao preciso fazer o Dispose aqui ! Porque ?
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return listaAlunos;
+        }
+
+        public List<Aluno> RecuperarAlunosSQLCommand()
+        {
+            List<Aluno> listaAlunos = new List<Aluno>();
+
+            try
+            {
+
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    conexao.Open();
+
+                    using (SqlCommand comando = new SqlCommand())
+                    {
+                        comando.Connection = conexao;
+                        comando.CommandType = CommandType.Text;
+                        comando.CommandText = $@"SELECT * from Alunos";
+                        
+
+                        using (IDataReader reader = comando.ExecuteReader()) //ExecuteScalar
+                        {
+                            while (reader.Read())
+                            {
+
+                                Aluno alu = new Aluno();
+
+                                if (!reader.IsDBNull(0))
+                                {
+                                    alu.Id = Convert.ToInt32(reader[0]);
+                                }
+
+                                if (!reader.IsDBNull(1))
+                                {
+                                    alu.Nome = Convert.ToString(reader[1]);
+                                }
+
+                                if (!reader.IsDBNull(2))
+                                {
+                                    alu.Telefone = Convert.ToString(reader[2]);
+                                }
+
+                                listaAlunos.Add(alu);
+                            }
+
+                        }
+                    }
+
+                    conexao.Close(); //Da para abrir novamente
+                    //conexao.Dispose(); //nao pode abrir novamente.
+                    //Nao preciso fazer o Dispose aqui ! Porque ?
                 }
             }
             catch (Exception ex)
@@ -126,7 +197,8 @@ namespace AcessoBancoDados
 
                     using (SqlCommand comando = new SqlCommand(sql, conexao))
                     {
-                        
+                        comando.CommandType=CommandType.Text; 
+
                         var param1 = new SqlParameter("@nome", SqlDbType.VarChar); 
                         param1.Value = alu.Nome;
                         var param2 = new SqlParameter("@telefone", SqlDbType.VarChar);
