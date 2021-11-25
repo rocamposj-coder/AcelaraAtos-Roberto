@@ -50,7 +50,6 @@ namespace Listas
             Console.WriteLine(existe);
 
 
-
             //Adicionando uma lista dentro de outra
             List<int> novaLista = new List<int>();
             novaLista.Add(120);

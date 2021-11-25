@@ -4,8 +4,20 @@ using System.Text;
 
 namespace EstruturasDeDados
 {
+    public class Aluno
+    {
+        public string Nome { get; set; }
+        public int Idade { get; set; }
 
-   
+        public override string ToString()
+        {
+            
+            string retorno = "";            
+             retorno = $"\n Nome: {this.Nome} Idade {this.Idade}";            
+
+            return retorno;
+        }
+    }
 
     public class Lista<T> : List<T>
     {
@@ -16,10 +28,10 @@ namespace EstruturasDeDados
 
             for(int i=0; i<this.Count; i++)
             {
-                retorno += this[i].ToString() + " ";
+                retorno += this[i].ToString();
             }
 
-            return retorno;
+            return retorno + "\n";
         }
     }
 
@@ -29,11 +41,11 @@ namespace EstruturasDeDados
         {
             Console.WriteLine("Estruturas de Dados");
 
-            List<int> listaInteiros = new List<int>();
-            listaInteiros.Add(1);
-            listaInteiros.Add(2);
-            listaInteiros.Add(3);
-            Console.WriteLine(listaInteiros);
+            Lista<Aluno> listaInteiros = new Lista<Aluno>();
+            listaInteiros.Add(new Aluno() { Nome = "Roberto", Idade = 25 });
+            listaInteiros.Add(new Aluno() { Nome = "Jose", Idade = 28 });
+            listaInteiros.Add(new Aluno() { Nome = "Antonio", Idade = 35 });
+            Console.Write(listaInteiros);
 
 
             Queue<int> filaInteiros = new Queue<int>();
