@@ -51,6 +51,137 @@ namespace AcessoDapper
             return listaAlunos;
         }
 
+        public Aluno RecuperarAluno(Aluno alu)
+        {
+            
+            string sql = "SELECT * from Alunos Where [id] = @id"; //NUNCA CONCATENAR STRING AQUI, PELA MOR DE DEUS ....
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    alu = conexao.Query<Aluno>(sql, alu).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return alu;
+        }
+
+
+        public Aluno RecuperarAlunoCompleto(Aluno alu)
+        {
+            
+            string sql = @"SELECT * from Alunos
+                            INNER JOIN Telefone ON Telefone.idAluno = Alunos.id
+                            INNER JOIN Endereco ON Endereco.idAluno = Alunos.id
+                            WHERE Alunos.id = @id";
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    Aluno aluTemp = null;
+
+                    var items = conexao.Query<Aluno, Telefone, Endereco, Aluno>(sql,
+                        (aluno, telefone, endereco) =>  //Este metodo anonimo é executado para cada linha de retorno da consulta
+                        {                            
+                            if (aluTemp == null) //se o aluno ainda não esta instanciado 
+                            {
+                                aluno.Endereco = endereco;
+                                aluTemp = aluno;
+                                aluTemp.listaTelefones.Add(telefone);                                
+                            }
+                            else //se o aluno ja esta na coleção eu so adiciono o telefone
+                            {
+                                aluTemp.listaTelefones.Add(telefone);
+                            }
+
+                            return aluTemp;
+                        },
+                        alu);  // splitOn: "id"
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return alu;
+        }
+
+        public List<Aluno> RecuperarAlunosCompletos(List<Aluno> paramListaAlu)
+        {
+            List<Aluno> listaAlunos;
+
+
+            string sql = @"SELECT * from Alunos
+                            INNER JOIN Telefone ON Telefone.idAluno = Alunos.id
+                            INNER JOIN Endereco ON Endereco.idAluno = Alunos.id
+                            WHERE Alunos.id IN @id";
+
+
+            List<int> parametros = new List<int>();
+
+            foreach (var item in paramListaAlu)
+            {
+                parametros.Add(item.Id);
+            }
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    listaAlunos = new List<Aluno>();
+
+                    
+                    var items = conexao.Query<Aluno, Telefone, Endereco, Aluno>(sql,
+                        (aluno, telefone, endereco) =>  //Este metodo anonimo é executado para cada linha de retorno da consulta
+                        {
+                            var alu = listaAlunos.Where(a => a.Id == aluno.Id).FirstOrDefault();
+                            if (alu == null) //se o aluno ainda não esta na coleção eu adiciono tudo
+                            {
+                                aluno.Endereco = endereco;
+                                alu = aluno;
+                                alu.listaTelefones.Add(telefone);
+                                listaAlunos.Add(alu);
+                            }
+                            else //se o aluno ja esta na coleção eu so adiciono o telefone
+                            {
+                                alu.listaTelefones.Add(telefone);
+                            }
+
+                            return aluno;
+                        }, parametros[0]);  // splitOn: "id"
+
+                    //listaAlunos = items.AsList();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return listaAlunos;
+        }
+
+
         public Aluno AtualizarAluno(Aluno alu)
         {
             try
@@ -301,10 +432,7 @@ namespace AcessoDapper
 
 
             return alu;
-        }
-
-            
-
+        }                   
 
         public List<Aluno> RecuperarAlunosEnderecos()
         {
@@ -439,7 +567,59 @@ namespace AcessoDapper
             return listaAlunos;
         }
 
-        
+       
+
+
+        //Corriga este metodo
+        public List<Aluno> RecuperarAlunosTelefonesEndereco(List<Aluno> listaAlunosParam)
+        {
+            List<Aluno> listaAlunos;
+
+
+            string sql = @"SELECT * from Alunos
+                            INNER JOIN Telefone ON Telefone.idAluno = Alunos.id
+                            INNER JOIN Endereco ON Endereco.idAluno = Alunos.id
+                            WHERE Alunos.id IN @id";
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    listaAlunos = new List<Aluno>();
+
+                    var items = conexao.Query<Aluno, Telefone, Endereco, Aluno>(sql,
+                        (aluno, telefone, endereco) =>  //Este metodo anonimo é executado para cada linha de retorno da consulta
+                        {
+                            var alu = listaAlunos.Where(a => a.Id == aluno.Id).FirstOrDefault();
+                            if (alu == null) //se o aluno ainda não esta na coleção eu adiciono tudo
+                            {
+                                aluno.Endereco = endereco;
+                                alu = aluno;
+                                alu.listaTelefones.Add(telefone);
+                                listaAlunos.Add(alu);
+                            }
+                            else //se o aluno ja esta na coleção eu so adiciono o telefone
+                            {
+                                alu.listaTelefones.Add(telefone);
+                            }
+
+                            return aluno;
+                        },
+                        listaAlunosParam);  // splitOn: "id"
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return listaAlunos;
+        }
+
+
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 
 /*
@@ -25,6 +26,19 @@ namespace AcessoDapper
 
 
             DAOAluno daoAluno = new DAOAluno();
+
+            /*
+            List<Aluno> listaAluno  = new List<Aluno>() 
+            { 
+             new Aluno() { Id = 44},
+             new Aluno() { Id = 45}
+            };
+
+            
+            var alu = daoAluno.RecuperarAlunoCompleto(listaAluno.FirstOrDefault());
+            listaAluno = daoAluno.RecuperarAlunosTelefonesEndereco(listaAluno);
+            */
+            
 
             //Basica
             List<Aluno> listaAlunos = daoAluno.RecuperarAlunos();// RecuperarAlunos();
@@ -75,7 +89,7 @@ namespace AcessoDapper
             var telefones = daoAluno.ExecutarProcedureConsultaTelefones(alu);
 
             
-
+            
 
         }
     }
