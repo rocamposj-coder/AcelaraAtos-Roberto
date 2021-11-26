@@ -42,11 +42,22 @@ namespace AcessoDapper
 
             alu.listaTelefones = listaTelefone;
 
-            
+            //alu = daoAluno.InserirAlunoTelefone(alu);
+
+
             alu.Nome = "Roberto lindo";
             alu.Telefone = "666um tapa na oreia";
 
-            alu = daoAluno.AtualizarAluno(alu); //Este codigo não esta atualizando, explique o motivo e faça os ajustes necessários para funcionar.
+            //alu = daoAluno.AtualizarAluno(alu);
+
+            alu.IdAluno = 27;
+
+            daoAluno.ExecutarProcedureConsultaTelefones(alu);
+
+            daoAluno.ExecutarProcedureRemoveAluno(alu);
+
+
+
         }
     }
 }

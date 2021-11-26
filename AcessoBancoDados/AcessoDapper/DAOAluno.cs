@@ -153,7 +153,7 @@ namespace AcessoDapper
                 using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
                 {
                     var retornoAluno = conexao.Execute(sqlAluno, alu);
-                    alu.IdAluno = Convert.ToInt32(retornoAluno);
+                    //alu.IdAluno = Convert.ToInt32(retornoAluno);
                 }
             }
             catch (DbException exDb)
@@ -173,6 +173,77 @@ namespace AcessoDapper
 
 
             return alu;
+        }
+
+
+        public int ExecutarProcedureRemoveAluno(Aluno alu)
+        {
+            int linhasAfetadas = 0;
+
+            try
+            {
+                string procedure = "[removeAluno]";
+                var pars = new { idAluno = alu.IdAluno };
+
+
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    var retornoAluno = conexao.Execute(procedure, pars, commandType: CommandType.StoredProcedure);
+                    linhasAfetadas = Convert.ToInt32(retornoAluno);
+                }
+            }
+            catch (DbException exDb)
+            {
+                Console.WriteLine("DbException.GetType: {0}", exDb.GetType());
+                Console.WriteLine("DbException.Source: {0}", exDb.Source);
+                Console.WriteLine("DbException.ErrorCode: {0}", exDb.ErrorCode);
+                Console.WriteLine("DbException.Message: {0}", exDb.Message);
+                return 0;
+            }
+            // Handle all other exceptions.
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception.Message: {0}", ex.Message);
+                return 0;
+            }
+
+
+            return linhasAfetadas;
+        }
+
+        public List<Telefone> ExecutarProcedureConsultaTelefones(Aluno alu)
+        {
+            List<Telefone> listaTelefones;
+
+            try
+            {
+                string procedure = "[consultarTelefone]";
+                var pars = new { idAluno = alu.IdAluno };
+
+
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    var telefones = conexao.Query<Telefone>(procedure, pars, commandType: CommandType.StoredProcedure);
+                    listaTelefones = telefones.AsList();
+                }
+            }
+            catch (DbException exDb)
+            {
+                Console.WriteLine("DbException.GetType: {0}", exDb.GetType());
+                Console.WriteLine("DbException.Source: {0}", exDb.Source);
+                Console.WriteLine("DbException.ErrorCode: {0}", exDb.ErrorCode);
+                Console.WriteLine("DbException.Message: {0}", exDb.Message);
+                return null;
+            }
+            // Handle all other exceptions.
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception.Message: {0}", ex.Message);
+                return null;
+            }
+
+
+            return listaTelefones;
         }
 
         //Implementar o metodo para atualizar um aluno (UPDATE)
