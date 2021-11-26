@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AcessoDapper
 {
+    //Para facilitar nossa vida e diminuir a quantidade de codigo utilize sempre o mesmo nome dos atributos do banco
     internal class Telefone
     {
         public int Id { get; set; }

@@ -25,18 +25,26 @@ namespace AcessoDapper
 
 
             DAOAluno daoAluno = new DAOAluno();
-            //List<Aluno> listaAlunos = daoAluno.RecuperarAlunos();// RecuperarAlunos();
 
+            //Basica
+            List<Aluno> listaAlunos = daoAluno.RecuperarAlunos();// RecuperarAlunos();
+            //Com join
+            listaAlunos = daoAluno.RecuperarAlunosEnderecos();
+            listaAlunos = daoAluno.RecuperarAlunosTelefones();
+            //Dois Joins
+            listaAlunos = daoAluno.RecuperarAlunosTelefonesEndereco();
+
+
+            //INserindo alunos
             Aluno alu = new Aluno();
-            alu.Nome = "Hulk Esmaga";
-            alu.Telefone = "3434-1212";
-
+            alu.Nome = "Homem Arana";
+            alu.Telefone = "4545-4545";
 
             var listaTelefone = new List<Telefone>
                         {
-                            { new Telefone { NumeroTelefone  = "1233-1234" } },
-                            { new Telefone { NumeroTelefone  = "4321-1234" } },
-                            { new Telefone { NumeroTelefone  = "5678-1234" } }
+                            { new Telefone { NumeroTelefone  = "4444-4444" } },
+                            { new Telefone { NumeroTelefone  = "5555-5555" } },
+                            { new Telefone { NumeroTelefone  = "6666-6666" } }
 
                         };
 
@@ -50,28 +58,23 @@ namespace AcessoDapper
                 Numero = "123"
             };
 
+            alu = daoAluno.InserirAluno(alu);
 
+            alu = daoAluno.InserirAlunoTelefone(alu);
 
             alu = daoAluno.InserirAlunoTelefoneEndereco(alu);
 
 
-            //alu.Nome = "Roberto lindo";
-            //alu.Telefone = "666um tapa na oreia";
+            alu.Nome = "Roberto Mais que Lindo";
+            alu.Telefone = "666 outro tapa na oreia";
 
-            //alu = daoAluno.AtualizarAluno(alu);
+            alu = daoAluno.AtualizarAluno(alu);
 
-            //listaAlunos = daoAluno.RecuperarAlunosEnderecos();
+            var linhas = daoAluno.ExecutarProcedureRemoveAluno(alu);
 
-            //listaAlunos = daoAluno.RecuperarAlunosTelefones();
+            var telefones = daoAluno.ExecutarProcedureConsultaTelefones(alu);
 
-
-            var listaAlunos = daoAluno.RecuperarAlunosTelefonesEndereco();
-
-            //daoAluno.ExecutarProcedureConsultaTelefones(alu);
-
-            //alu.IdAluno = 27;
-            //daoAluno.ExecutarProcedureRemoveAluno(alu);
-
+            
 
 
         }
