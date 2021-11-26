@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace AcessoDapper
 {
-    internal class Telefone
+    internal class Endereco
     {
         public int Id { get; set; }
-        public string NumeroTelefone { get; set; }
-
+        public string Logradouro { get; set;}
+        public string Cep { get; set; }
+        public string Numero { get; set; }
         public int IdAluno { get; set; }
+
     }
 }

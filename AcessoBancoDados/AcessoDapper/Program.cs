@@ -25,7 +25,7 @@ namespace AcessoDapper
 
 
             DAOAluno daoAluno = new DAOAluno();
-            List<Aluno> listaAlunos = daoAluno.RecuperarAlunos();// RecuperarAlunos();
+            //List<Aluno> listaAlunos = daoAluno.RecuperarAlunos();// RecuperarAlunos();
 
             Aluno alu = new Aluno();
             alu.Nome = "Hulk Esmaga";
@@ -42,19 +42,35 @@ namespace AcessoDapper
 
             alu.listaTelefones = listaTelefone;
 
-            //alu = daoAluno.InserirAlunoTelefone(alu);
+
+            alu.Endereco = new Endereco()
+            {
+                Logradouro = "Rua Cidade do Galo",
+                Cep = "30.023-90",
+                Numero = "123"
+            };
 
 
-            alu.Nome = "Roberto lindo";
-            alu.Telefone = "666um tapa na oreia";
+
+            alu = daoAluno.InserirAlunoTelefoneEndereco(alu);
+
+
+            //alu.Nome = "Roberto lindo";
+            //alu.Telefone = "666um tapa na oreia";
 
             //alu = daoAluno.AtualizarAluno(alu);
 
-            alu.IdAluno = 27;
+            //listaAlunos = daoAluno.RecuperarAlunosEnderecos();
 
-            daoAluno.ExecutarProcedureConsultaTelefones(alu);
+            //listaAlunos = daoAluno.RecuperarAlunosTelefones();
 
-            daoAluno.ExecutarProcedureRemoveAluno(alu);
+
+            var listaAlunos = daoAluno.RecuperarAlunosTelefonesEndereco();
+
+            //daoAluno.ExecutarProcedureConsultaTelefones(alu);
+
+            //alu.IdAluno = 27;
+            //daoAluno.ExecutarProcedureRemoveAluno(alu);
 
 
 

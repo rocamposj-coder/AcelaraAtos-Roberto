@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
 
 /*
  Referência:
@@ -54,7 +55,7 @@ namespace AcessoDapper
 
         public Aluno InserirAluno(Aluno alu)
         {
-            alu.IdAluno = 0;
+            alu.Id = 0;
             try
             {
                 string sqlAluno = $@"INSERT INTO Alunos (nome,telefone)
@@ -65,7 +66,7 @@ namespace AcessoDapper
                 using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
                 {
                     var retornoAluno = conexao.ExecuteScalar(sqlAluno, alu);
-                    alu.IdAluno = Convert.ToInt32(retornoAluno);                                           
+                    alu.Id = Convert.ToInt32(retornoAluno);                                           
                 }
             }
             catch (DbException exDb)
@@ -89,11 +90,11 @@ namespace AcessoDapper
 
         public Aluno InserirAlunoTelefone(Aluno alu)
         {
-            alu.IdAluno = 0;
+            alu.Id = 0;
             try
             {
                 string sqlAluno = $@"INSERT INTO Alunos (nome,telefone)
-                                                OUTPUT INSERTED.idAluno 
+                                                OUTPUT INSERTED.id 
                                                 VALUES (@nome, @telefone)";
 
                 string sqlTelefone = @"INSERT INTO Telefone (numeroTelefone, idAluno)
@@ -107,14 +108,75 @@ namespace AcessoDapper
                     using (var transaction = conexao.BeginTransaction())
                     {
                         var retornoAluno = conexao.ExecuteScalar(sqlAluno, alu, transaction);
-                        alu.IdAluno = Convert.ToInt32(retornoAluno);
+                        alu.Id = Convert.ToInt32(retornoAluno);
 
                         foreach (var tel in alu.listaTelefones)
                         {
-                            tel.IdAluno = alu.IdAluno;
+                            tel.IdAluno = alu.Id;
                         }
 
                         var retornoTelefone = conexao.Execute(sqlTelefone, alu.listaTelefones, transaction);
+
+                        transaction.Commit();
+                    }
+                }
+            }
+            catch (DbException exDb)
+            {
+                Console.WriteLine("DbException.GetType: {0}", exDb.GetType());
+                Console.WriteLine("DbException.Source: {0}", exDb.Source);
+                Console.WriteLine("DbException.ErrorCode: {0}", exDb.ErrorCode);
+                Console.WriteLine("DbException.Message: {0}", exDb.Message);
+                return alu;
+            }
+            // Handle all other exceptions.
+            catch (Exception ex)
+            {
+                Console.WriteLine("Exception.Message: {0}", ex.Message);
+                return alu;
+            }
+
+
+            return alu;
+        }
+
+        public Aluno InserirAlunoTelefoneEndereco(Aluno alu)
+        {
+            //O objeto aluno deve chegar aqui completo, com a lista de telefones e com o atributo endereço preenchido
+
+            alu.Id = 0;
+            try
+            {
+                string sqlAluno = $@"INSERT INTO Alunos (nome,telefone)
+                                                OUTPUT INSERTED.id 
+                                                VALUES (@nome, @telefone)";
+
+                string sqlTelefone = @"INSERT INTO Telefone (numeroTelefone, idAluno)
+                                       VALUES( @numeroTelefone, @idAluno)";
+
+                string sqlEndereco = @"INSERT INTO Endereco (logradouro, cep, numero, idAluno)
+                                       VALUES( @logradouro, @cep, @numero, @idAluno)";
+
+
+
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    conexao.Open();
+                    using (var transaction = conexao.BeginTransaction())
+                    {
+                        var retornoAluno = conexao.ExecuteScalar(sqlAluno, alu, transaction);
+                        alu.Id = Convert.ToInt32(retornoAluno);
+
+                        foreach (var tel in alu.listaTelefones)
+                        {
+                            tel.IdAluno = alu.Id;
+                        }                       
+
+                        var retornoTelefone = conexao.Execute(sqlTelefone, alu.listaTelefones, transaction);
+
+
+                        alu.Endereco.IdAluno = alu.Id;
+                        var retornoEndereco = conexao.Execute(sqlEndereco, alu.Endereco, transaction);
 
                         transaction.Commit();
                     }
@@ -183,7 +245,7 @@ namespace AcessoDapper
             try
             {
                 string procedure = "[removeAluno]";
-                var pars = new { idAluno = alu.IdAluno };
+                var pars = new { idAluno = alu.Id };
 
 
                 using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
@@ -218,7 +280,7 @@ namespace AcessoDapper
             try
             {
                 string procedure = "[consultarTelefone]";
-                var pars = new { idAluno = alu.IdAluno };
+                var pars = new { idAluno = alu.Id };
 
 
                 using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
@@ -244,6 +306,143 @@ namespace AcessoDapper
 
 
             return listaTelefones;
+        }
+
+
+        public List<Aluno> RecuperarAlunosEnderecos()
+        {
+            List<Aluno> listaAlunos;
+
+
+
+            string sql = @"SELECT * from Alunos
+                           INNER JOIN Endereco ON Endereco.idAluno = Alunos.id"; 
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    var items = conexao.Query<Aluno, Endereco, Aluno>(sql,
+                        (aluno, endereco) => 
+                        {
+                            aluno.Endereco = endereco;
+                            return aluno;
+                        });
+
+                    listaAlunos = items.AsList(); 
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return listaAlunos;
+        }
+
+
+
+        public List<Aluno> RecuperarAlunosTelefones()
+        {
+            List<Aluno> listaAlunos;
+
+
+
+            string sql = @"SELECT * from Alunos
+                           INNER JOIN Telefone ON Telefone.idAluno = Alunos.id";
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    listaAlunos = new List<Aluno>();
+
+                    var items = conexao.Query<Aluno, Telefone, Aluno>(sql,
+                        (aluno, telefone) =>  //Este metodo anonimo é executado para cada linha de retorno da consulta
+                        {
+                            var alu = listaAlunos.Where(a => a.Id == aluno.Id).FirstOrDefault();
+                            if (alu == null) //se o aluno ainda não esta na coleção eu adiciono tudo
+                            {
+                                alu = aluno;
+                                alu.listaTelefones.Add(telefone);
+                                listaAlunos.Add(alu);
+                            }
+                            else //se o aluno ja esta na coleção eu so adiciono o telefone
+                            {
+                                alu.listaTelefones.Add(telefone);
+                            }
+                            
+                            return aluno;
+                        }, splitOn: "Telefone");
+
+                    //listaAlunos = items.AsList();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return listaAlunos;
+        }
+
+
+        public List<Aluno> RecuperarAlunosTelefonesEndereco()
+        {
+            List<Aluno> listaAlunos;
+
+
+
+            string sql = @"SELECT * from Alunos
+                            INNER JOIN Telefone ON Telefone.idAluno = Alunos.id
+                            INNER JOIN Endereco ON Endereco.idAluno = Alunos.id";
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {
+                    listaAlunos = new List<Aluno>();
+
+                    var items = conexao.Query<Aluno, Telefone, Endereco, Aluno>(sql,
+                        (aluno, telefone, endereco) =>  //Este metodo anonimo é executado para cada linha de retorno da consulta
+                        {
+                            var alu = listaAlunos.Where(a => a.Id == aluno.Id).FirstOrDefault();
+                            if (alu == null) //se o aluno ainda não esta na coleção eu adiciono tudo
+                            {
+                                aluno.Endereco = endereco;
+                                alu = aluno;
+                                alu.listaTelefones.Add(telefone);
+                                listaAlunos.Add(alu);                                
+                            }
+                            else //se o aluno ja esta na coleção eu so adiciono o telefone
+                            {
+                                alu.listaTelefones.Add(telefone);
+                            }
+
+                            return aluno;
+                        });  // splitOn: "id"
+
+                    //listaAlunos = items.AsList();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                //throw;
+                return null;
+            }
+
+            return listaAlunos;
         }
 
         //Implementar o metodo para atualizar um aluno (UPDATE)

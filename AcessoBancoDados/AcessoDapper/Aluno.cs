@@ -10,10 +10,15 @@ namespace AcessoDapper
     {
         //Para facilitar nossa vida e diminuir a quantidade de codigo utilize sempre o mesmo nome dos atributos do banco
          
-        public int IdAluno { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string Telefone { get; set; }
-
+        public Endereco Endereco { get; set; }
         public List<Telefone> listaTelefones { get; set; }
+
+        public Aluno()
+        {
+            this.listaTelefones = new List<Telefone>();
+        }
     }
 }
