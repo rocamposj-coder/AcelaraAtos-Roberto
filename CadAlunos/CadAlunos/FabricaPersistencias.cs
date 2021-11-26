@@ -9,7 +9,7 @@ namespace CadAlunos
     
     internal class FabricaPersistencias
     {
-        const int TipoPersistencia = 1;
+        const int TipoPersistencia = 0;
 
         public IPersistencia CriarPersistencia()
         {

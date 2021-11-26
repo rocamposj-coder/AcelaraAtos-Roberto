@@ -8,13 +8,19 @@ namespace CadAlunos
 {
     internal class NE_Aluno
     {
-        public int CadastrarAluno(Aluno alu)
-        { 
-            int resultado = 0;
-            FabricaPersistencias fabrica = new FabricaPersistencias();
-            IPersistencia ipersistencia = fabrica.CriarPersistencia();
-            ipersistencia.CadastrarAluno(alu);
-            return resultado;
+        public Aluno CadastrarAluno(Aluno alu)
+        {
+            if (alu == null)
+            {
+                //Console.WriteLine("Erro aluno nulo não suportado");
+            }
+            else
+            {
+                FabricaPersistencias fabrica = new FabricaPersistencias();
+                IPersistencia ipersistencia = fabrica.CriarPersistencia();
+                alu = ipersistencia.CadastrarAluno(alu);
+            }
+            return alu;
         }
     }
 }

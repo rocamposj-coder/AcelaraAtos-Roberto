@@ -23,7 +23,7 @@ namespace CadAlunos
         {
             Aluno alu = CadastrarAluno();
             NE_Aluno neAluno = new NE_Aluno();
-            neAluno.CadastrarAluno(alu);
+            alu = neAluno.CadastrarAluno(alu);
         }
     }
 }

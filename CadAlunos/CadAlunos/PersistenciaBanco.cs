@@ -8,9 +8,10 @@ namespace CadAlunos
 {
     internal class PersistenciaBanco : IPersistencia
     {
-        public void CadastrarAluno(Aluno alu)
+        public Aluno CadastrarAluno(Aluno alu)
         {
             Console.WriteLine($"Cadastrando aluno {alu.Nome} no Banco de Dados");
+            return alu; 
         }
     }
 }

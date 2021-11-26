@@ -122,6 +122,7 @@ namespace AcessoDapper
             return alu;
         }
 
+
         public List<Aluno> RecuperarAlunosCompletos(List<Aluno> paramListaAlu)
         {
             List<Aluno> listaAlunos;
