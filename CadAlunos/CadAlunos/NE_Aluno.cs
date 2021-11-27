@@ -23,5 +23,19 @@ namespace CadAlunos
             }
             return alu;
         }
+
+
+        public List<Aluno> ListarAlunos()
+        {
+            List<Aluno> listaAlunos;
+
+            FabricaPersistencias fabrica = new FabricaPersistencias();
+            IPersistencia ipersistencia = fabrica.CriarPersistencia();
+            listaAlunos = ipersistencia.ListarAlunos(); 
+
+            return listaAlunos;
+        }
+
+
     }
 }

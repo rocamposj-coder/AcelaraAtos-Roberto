@@ -13,5 +13,12 @@ namespace CadAlunos
             Console.WriteLine($"Cadastrando aluno {alu.Nome} no Banco de Dados");
             return alu; 
         }
+
+        public List<Aluno> ListarAlunos()
+        {
+            List<Aluno> listaAlunos = new List<Aluno>();
+
+            return listaAlunos;
+        }
     }
 }

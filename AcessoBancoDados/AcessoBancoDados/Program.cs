@@ -8,7 +8,7 @@ namespace AcessoBancoDados
         static void Main(string[] args)
         {
             DAOAluno daoAluno = new DAOAluno();
-            List<Aluno> listaAlunos = daoAluno.RecuperarAlunosSQLCommand();// RecuperarAlunos();
+            List<Aluno> listaAlunos = daoAluno.RecuperarAlunos(); // RecuperarAlunosSQLCommand();// RecuperarAlunos();
 
             Aluno alu = new Aluno();
             alu.Nome = "Atermivaldo";

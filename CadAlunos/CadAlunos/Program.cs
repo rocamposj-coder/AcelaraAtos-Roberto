@@ -11,6 +11,9 @@ namespace CadAlunos
         static public Aluno CadastrarAluno()
         {
             Aluno alu = new Aluno();
+            alu.DataRegistro =  DateTime.Now;
+            alu.Situacao = SituacaoAluno.NaoAvaliado;
+            Console.Clear();
             Console.WriteLine("Digite o nome do Aluno");
             alu.Nome = Console.ReadLine();
             /*
@@ -19,33 +22,33 @@ namespace CadAlunos
             return alu;
         }
 
-        static int Menu()
+        static char Menu()
         {
             int opcao = 0;
             Console.Clear();
             Console.WriteLine("Menu");
             Console.WriteLine("1 - Para Cadastrar");
+            Console.WriteLine("2 - Para Listar");
             Console.WriteLine("0 - Para sair");
 
-            var op = Console.ReadKey();
-            var opString = op.ToString();
-            opcao = int.Parse(opString);
+            var op = Console.ReadKey();            
+            
 
-            return opcao;
+            return op.KeyChar;
         }
 
         static void Main(string[] args)
         {
-            int opcao = Menu();
+            char opcao = Menu();
 
             while (opcao != 0)
             {
                 switch (opcao)
                 {
-                    case 0:
-                        opcao = 0;
+                    case '0':
+                        Console.WriteLine("Saindo ....");
                         break;
-                    case 1:
+                    case '1':
                         Aluno alu = CadastrarAluno();
                         NE_Aluno neAluno = new NE_Aluno();
                         alu = neAluno.CadastrarAluno(alu);

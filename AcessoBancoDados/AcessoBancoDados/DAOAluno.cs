@@ -46,20 +46,28 @@ namespace AcessoBancoDados
 
                         using (IDataReader reader = comando.ExecuteReader())
                         {
+                            Aluno alu;
+
                             while (reader.Read())
                             {
-
-                                Aluno alu = new Aluno();
+                                alu = new Aluno();
 
                                 if (!reader.IsDBNull(0))
                                 {
-                                    alu.Nome = Convert.ToString(reader[0]);
+                                    alu.Id = Convert.ToInt32(reader[0]);
                                 }
 
                                 if (!reader.IsDBNull(1))
                                 {
-                                    alu.Telefone = Convert.ToString(reader[1]);
+                                    alu.Nome = Convert.ToString(reader[1]);
                                 }
+
+                                if (!reader.IsDBNull(2))
+                                {
+                                    alu.Telefone = Convert.ToString(reader[2]);
+                                }
+
+                                
 
                                 listaAlunos.Add(alu);
                             }
@@ -157,7 +165,8 @@ namespace AcessoBancoDados
                     {
                         comando.CommandType = CommandType.Text;
                         comando.CommandText = $@"INSERT INTO Alunos (nome,telefone)
-                                                 VALUES ('{alu.Nome}' ,'{alu.Telefone}')";
+                                                 VALUES ('{alu.Nome}' ,'{alu.Telefone}')"; //Eletrochoque para quem fizer
+                        //Risco de injection
 
                         int rows = comando.ExecuteNonQuery();                        
                         Console.WriteLine("Registros inseridos {0}.", rows);
@@ -192,7 +201,7 @@ namespace AcessoBancoDados
                 {   
                     
                     string sql = $@"INSERT INTO Alunos (nome,telefone)
-                                                OUTPUT INSERTED.idAluno 
+                                                OUTPUT INSERTED.id 
                                                 VALUES (@nome, @telefone)";
 
                     using (SqlCommand comando = new SqlCommand(sql, conexao))
@@ -205,7 +214,7 @@ namespace AcessoBancoDados
                         param2.Value = alu.Telefone;
 
                         //Para recuperar o id inserido
-                        var param0 = comando.Parameters.AddWithValue("@idAluno", 0).Direction = ParameterDirection.Output;
+                        var param0 = comando.Parameters.AddWithValue("@id", 0).Direction = ParameterDirection.Output;
                         
                         comando.Parameters.Add(param1);                            
                         comando.Parameters.Add(param2);
@@ -214,16 +223,17 @@ namespace AcessoBancoDados
                         conexao.Open();
 
                         //SqlTransaction transaction = null;
-                        //transaction = conexao.BeginTransaction();
+                        //var transaction = conexao.BeginTransaction();
                         //comando.Transaction = transaction;  
 
                         //Executa a query                        
                         var retorno = comando.ExecuteScalar();
-
-                        //alu.id = Convert.ToInt32(retorno);
+                                                                
+                        conexao.Close();
 
                         Console.WriteLine($"Registros inserido com o id {retorno}");
-                        conexao.Close();
+                        alu.Id = Convert.ToInt32(retorno);
+
 
                         //transaction.Commit();
                     }

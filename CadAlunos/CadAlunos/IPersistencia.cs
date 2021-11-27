@@ -8,7 +8,11 @@ namespace CadAlunos
 {
     internal interface IPersistencia
     {
-        Aluno CadastrarAluno(Aluno alu);       
+        Aluno CadastrarAluno(Aluno alu);
+
+        List<Aluno> ListarAlunos();
+
+
 
     }
 }
