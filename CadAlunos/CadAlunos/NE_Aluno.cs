@@ -12,7 +12,8 @@ namespace CadAlunos
         {
             if (alu == null)
             {
-                //Console.WriteLine("Erro aluno nulo não suportado");
+                alu.CodErro = -1;
+                alu.MSGErro = "Erro aluno nulo não suportado";
             }
             else
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CadAlunos
 {
-    public class Aluno
+    public class Aluno : EntidadeBase
     {
         private string nome;
         private string cpf;
