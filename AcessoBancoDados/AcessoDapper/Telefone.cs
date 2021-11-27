@@ -11,7 +11,6 @@ namespace AcessoDapper
     {
         public int Id { get; set; }
         public string NumeroTelefone { get; set; }
-
         public int IdAluno { get; set; }
     }
 }

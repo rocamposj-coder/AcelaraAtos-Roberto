@@ -23,21 +23,22 @@ namespace AcessoDapper
         static void Main(string[] args)
         {
 
-
-
-            DAOAluno daoAluno = new DAOAluno();
+          DAOAluno daoAluno = new DAOAluno();
 
             /*
-            List<Aluno> listaAluno  = new List<Aluno>() 
-            { 
-             new Aluno() { Id = 44},
-             new Aluno() { Id = 45}
-            };
+          List<Aluno> listaAluno  = new List<Aluno>() 
+          { 
+           new Aluno() { Id = 44},
+           new Aluno() { Id = 45}
+          };            
+          
+          listaAluno = daoAluno.RecuperarAlunosCompletos(listaAluno);
+          */
 
-            
-            var alu = daoAluno.RecuperarAlunoCompleto(listaAluno.FirstOrDefault());
-            listaAluno = daoAluno.RecuperarAlunosTelefonesEndereco(listaAluno);
-            */
+
+                     
+
+          
             
 
             //Basica
@@ -47,6 +48,8 @@ namespace AcessoDapper
             listaAlunos = daoAluno.RecuperarAlunosTelefones();
             //Dois Joins
             listaAlunos = daoAluno.RecuperarAlunosTelefonesEndereco();
+
+
 
 
             //INserindo alunos

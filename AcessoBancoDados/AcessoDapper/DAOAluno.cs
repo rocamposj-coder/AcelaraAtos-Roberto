@@ -37,7 +37,6 @@ namespace AcessoDapper
                 using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
                 {
                     listaAlunos = conexao.Query<Aluno>(sql).AsList(); 
-
                 }
             }
             catch (Exception ex)
@@ -131,14 +130,14 @@ namespace AcessoDapper
             string sql = @"SELECT * from Alunos
                             INNER JOIN Telefone ON Telefone.idAluno = Alunos.id
                             INNER JOIN Endereco ON Endereco.idAluno = Alunos.id
-                            WHERE Alunos.id IN @id";
+                            WHERE Alunos.id IN (@id)";
 
 
-            List<int> parametros = new List<int>();
+            object []parametros = new object[paramListaAlu.Count];
 
-            foreach (var item in paramListaAlu)
+            for (int i=0; i<paramListaAlu.Count; i++)
             {
-                parametros.Add(item.Id);
+                parametros[i] =  new { id = paramListaAlu[i].Id };
             }
 
             try
@@ -165,7 +164,7 @@ namespace AcessoDapper
                             }
 
                             return aluno;
-                        }, parametros[0]);  // splitOn: "id"
+                        }, parametros);  // splitOn: "id"
 
                     //listaAlunos = items.AsList();
 
@@ -266,6 +265,7 @@ namespace AcessoDapper
                 {
                     var telefones = conexao.Query<Telefone>(procedure, pars, commandType: CommandType.StoredProcedure);
                     listaTelefones = telefones.AsList();
+                    // listaTelefones = conexao.Query<Telefone>(procedure, pars, commandType: CommandType.StoredProcedure).AsList();
                 }
             }
             catch (DbException exDb)
