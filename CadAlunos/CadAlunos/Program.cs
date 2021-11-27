@@ -10,9 +10,7 @@ namespace CadAlunos
     {
         static public Aluno CadastrarAluno()
         {
-            Aluno alu = new Aluno();
-            alu.DataRegistro =  DateTime.Now;
-            alu.Situacao = SituacaoAluno.NaoAvaliado;
+            Aluno alu = new Aluno();            
             Console.Clear();
             Console.WriteLine("Digite o nome do Aluno");
             alu.Nome = Console.ReadLine();

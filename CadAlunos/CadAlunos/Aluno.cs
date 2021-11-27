@@ -28,5 +28,12 @@ namespace CadAlunos
 
         public DateTime DataRegistro { get => dataRegistro; set => dataRegistro = value; }
         public SituacaoAluno Situacao { get => situacao; set => situacao = value; }
+
+
+        public Aluno()
+        {
+            this.DataRegistro = DateTime.Now;
+            this.Situacao = SituacaoAluno.NaoAvaliado;
+        }
     }
 }
