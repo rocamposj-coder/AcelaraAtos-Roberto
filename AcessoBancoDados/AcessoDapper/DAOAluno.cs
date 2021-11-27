@@ -130,14 +130,16 @@ namespace AcessoDapper
             string sql = @"SELECT * from Alunos
                             INNER JOIN Telefone ON Telefone.idAluno = Alunos.id
                             INNER JOIN Endereco ON Endereco.idAluno = Alunos.id
-                            WHERE Alunos.id IN (@id)";
+                            WHERE Alunos.id IN @id";
 
 
-            object []parametros = new object[paramListaAlu.Count];
+            var parametros = new { id = new string[paramListaAlu.Count] };
+
+           
 
             for (int i=0; i<paramListaAlu.Count; i++)
             {
-                parametros[i] =  new { id = paramListaAlu[i].Id };
+                parametros.id[i] =  paramListaAlu[i].Id.ToString() ;
             }
 
             try

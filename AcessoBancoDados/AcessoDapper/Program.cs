@@ -25,7 +25,7 @@ namespace AcessoDapper
 
           DAOAluno daoAluno = new DAOAluno();
 
-            /*
+            
           List<Aluno> listaAluno  = new List<Aluno>() 
           { 
            new Aluno() { Id = 44},
@@ -33,7 +33,7 @@ namespace AcessoDapper
           };            
           
           listaAluno = daoAluno.RecuperarAlunosCompletos(listaAluno);
-          */
+          
 
 
                      

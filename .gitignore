@@ -64,3 +64,6 @@
 /CadAlunos/PadraoFabrica/obj
 /CadAlunos/.vs/CadAlunos/DesignTimeBuild
 /CadAlunos/.vs/CadAlunos
+/ApiRest/.vs/ApiRest
+/ApiRest/ApiRest/bin/Debug/net6.0
+/ApiRest/ApiRest/obj
