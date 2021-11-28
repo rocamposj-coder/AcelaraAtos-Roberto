@@ -54,7 +54,7 @@ namespace ApiRest
         public Aluno Get(int id)
         {            
             //Consulta na relação de alunos
-            var alu = listaAlunos.Where(a => a.Id == id).First();            
+            var alu = listaAlunos.FirstOrDefault(a => a.Id == id);            
 
             return alu;
         }
