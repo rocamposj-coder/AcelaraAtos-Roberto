@@ -67,6 +67,7 @@ namespace ApiRest
             return listaAlunos;
         }
 
+        
         // PUT api/<AlunosController>/13 -> Harry
         [HttpPut("{id}")]
         public IEnumerable<Aluno> Put(int id, [FromBody] Aluno value)
@@ -77,6 +78,20 @@ namespace ApiRest
 
             return listaAlunos;
         }
+
+        /*
+        //ALTERNATIVA DE IMPLEMENTACAO
+        [HttpPut("{id:int}")]
+        public IEnumerable<Aluno> Put([FromRoute] int id, [FromBody] Aluno value)
+        {
+            var elementoEncontrado = listaAlunos.Where(a => a.Id == id).First();
+            elementoEncontrado.Id = value.Id;
+            elementoEncontrado.Nome = value.Nome;
+
+            return listaAlunos;
+        }
+        */
+
 
         // DELETE api/<AlunosController>/5
         [HttpDelete("{id}")]
