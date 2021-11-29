@@ -67,3 +67,6 @@
 /ApiRest/.vs/ApiRest
 /ApiRest/ApiRest/bin/Debug/net6.0
 /ApiRest/ApiRest/obj
+/ApiRest/.vscode
+/ApiRest/WebApplication1/bin/Debug/net6.0
+/ApiRest/WebApplication1/obj

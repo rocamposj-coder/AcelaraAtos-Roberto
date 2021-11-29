@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "18c894b4-6c96-4330-9e6f-b3fd89ef6ce1",
+		"name": "EXEMPLOS-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Basica",
+			"item": [
+				{
+					"name": "GET passando ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/Basica/54",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Basica",
+								"54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST passando STRING",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"asdasdasd\"\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/Basica",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Basica"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "\"alo mundo\"",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT passando STRING(BODY) e int na URL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"asdasdasd\"\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/Basica/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Basica",
+								"13"
+							],
+							"query": [
+								{
+									"key": "value",
+									"value": "\"alo mundo\"",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE passando int na URL",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/Basica/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Basica",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\"Roberto teste\"\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/Basica",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Basica"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Aluno",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/Alunos/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Alunos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET passando um ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/Alunos/16",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Alunos",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST passando ALUNO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 54,\r\n    \"nome\": \"Roberto Lindo\",\r\n    \"telefone\":\"3434-3434\",\r\n    \"coderro\":0,\r\n    \"MensagemErro\":\"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/Alunos/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Alunos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT  passando ALUNO  ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CodErro\":0,\r\n    \"MensagemErro\": \"\",\r\n    \"id\": 51,\r\n    \"nome\": \"Roberto muito Lindo\",\r\n    \"telefone\": \"9999-9999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/Alunos/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Alunos",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE passando ALUNO  ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/Alunos/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"Alunos",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AlunosPlus",
+			"item": [
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosPlus/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosPlus",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET passando um ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosPlus/16",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosPlus",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST passando ALUNO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CodErro\":0,\r\n    \"MensagemErro\": \"\",\r\n    \"id\": 54,\r\n    \"nome\": \"Roberto muito Lindo\",\r\n    \"telefone\": \"9999-9999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosPlus/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosPlus",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT  passando ALUNO  ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CodErro\":0,\r\n    \"MensagemErro\": \"\",\r\n    \"id\": 54,\r\n    \"nome\": \"Indiana muito Lindo\",\r\n    \"telefone\": \"9999-9999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosPlus/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosPlus",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE  passando ALUNO  ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosPlus/13",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosPlus",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AlunosBancoDapper",
+			"item": [
+				{
+					"name": "DELETE  passando ALUNO  ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosBanco/57",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosBanco",
+								"57"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT  passando ALUNO  ID e retornado lista de alunos Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CodErro\":0,\r\n    \"MensagemErro\": \"\",\r\n    \"id\": 54,\r\n    \"nome\": \"Roberto muito Lindo\",\r\n    \"telefone\": \"9999-9999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosBanco/57",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosBanco",
+								"57"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST passando ALUNO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CodErro\":0,\r\n    \"MensagemErro\": \"\",\r\n    \"id\": 54,\r\n    \"nome\": \"Roberto Lindo\",\r\n    \"telefone\": \"9999-9999\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosBanco/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosBanco",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET passando um ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosBanco/59",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosBanco",
+								"59"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7227/api/AlunosBanco/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7227",
+							"path": [
+								"api",
+								"AlunosBanco",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "New Request Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":13,\r\n     \"Username\": \"Roberto\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7226",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7226"
+				}
+			},
+			"response": []
+		}
+	]
+}

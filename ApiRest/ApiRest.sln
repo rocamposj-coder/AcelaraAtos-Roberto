@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiRest", "ApiRest\ApiRest.csproj", "{6202A869-FBD8-4CD6-B9BE-314123EAB3AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiRest", "ApiRest\ApiRest.csproj", "{6202A869-FBD8-4CD6-B9BE-314123EAB3AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{ED3AD838-1BBC-48D2-AB34-D9940B20761B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6202A869-FBD8-4CD6-B9BE-314123EAB3AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6202A869-FBD8-4CD6-B9BE-314123EAB3AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6202A869-FBD8-4CD6-B9BE-314123EAB3AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED3AD838-1BBC-48D2-AB34-D9940B20761B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED3AD838-1BBC-48D2-AB34-D9940B20761B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED3AD838-1BBC-48D2-AB34-D9940B20761B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED3AD838-1BBC-48D2-AB34-D9940B20761B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

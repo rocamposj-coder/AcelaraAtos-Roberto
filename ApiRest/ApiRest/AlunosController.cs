@@ -21,18 +21,22 @@ namespace ApiRest
         {            
             Aluno aluno = new Aluno();
             aluno.Nome = "Hary poter";
+            aluno.Telefone = "1111-1111";
             aluno.Id = 13;
 
             Aluno aluno2 = new Aluno();
             aluno2.Nome = "Mickey Mouse";
+            aluno2.Telefone = "2222-2222";
             aluno2.Id = 14;
 
             Aluno aluno3 = new Aluno();
             aluno3.Nome = "Indiana Jones";
+            aluno3.Telefone = "3333-3333";
             aluno3.Id = 15;
 
             Aluno aluno4 = new Aluno();
             aluno4.Nome = "Vingador Hulk";
+            aluno4.Telefone = "4444-4444";
             aluno4.Id = 16;
 
             listaAlunos.Add(aluno);
