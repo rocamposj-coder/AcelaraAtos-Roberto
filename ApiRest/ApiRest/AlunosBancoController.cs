@@ -11,12 +11,11 @@ namespace ApiRest
     public class AlunosBancoController : ControllerBase
     {
         private NE_Aluno neAluno;
-        //private INE_Aluno neAluno;
+       
 
-        public AlunosBancoController(/*INE_Aluno nE_Aluno*/)
+        public AlunosBancoController()
         {
-             neAluno = new NE_Aluno();
-             //neAluno = nE_Aluno;
+             neAluno = new NE_Aluno();       
         }
 
         // GET: api/<AlunosController>
