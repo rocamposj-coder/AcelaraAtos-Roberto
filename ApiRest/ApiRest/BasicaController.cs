@@ -1,4 +1,5 @@
-﻿using ApiRest.Entidades;
+﻿using ApiRest.Atributos;
+using ApiRest.Entidades;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,7 +10,10 @@ namespace ApiRest
     [ApiController]
     public class BasicaController : ControllerBase
     {
+
         // GET: api/Basica
+        
+        [ApiKey]
         [HttpGet]
         public IEnumerable<string> Get()
         {
