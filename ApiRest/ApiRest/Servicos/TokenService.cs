@@ -20,15 +20,22 @@ namespace ApiRest.Servicos
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, "roberto"),  //User.Identity.Name
-                    new Claim(ClaimTypes.Role, "admin"),    //User.IsInRole
-                    new Claim("Valor", "teste")
-                }),
+                    new Claim(ClaimTypes.Name, user.Nome)             //User.Identity.Name
+                    //new Claim(ClaimTypes.Role, "admin"),            //User.IsInRole
+                    //new Claim(ClaimTypes.Role, "caochupandomanga"), //User.IsInRole
+                   
+                }),                
                 Expires = DateTime.UtcNow.AddHours(8),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key),
                     algorithm:SecurityAlgorithms.HmacSha256Signature)
             };
+
+            foreach(var role in user.ListaRoles)
+            {
+                tokenDescriptor.Subject.AddClaim(new Claim(ClaimTypes.Role, role.Descricao));
+            }
+
 
             //Criando efetivamente o TOKEN
             var token  = tokenHandler.CreateToken(tokenDescriptor);

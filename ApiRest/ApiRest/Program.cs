@@ -26,14 +26,16 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+
 builder.Services.AddControllers();
 
-//builder.Services.AddSingleton<INE_Aluno,NE_Aluno>();
+
 //builder.Services.AddTransient() //Cria novo objeto a cada requisição
 //builder.Services.AddScoped() // objeto criado por transação ( metodos na sequencia das camadas - mesma requisição)
 //builder.Services.AddScoped() // objeto é unico por app
 
-builder.Services.AddTransient<TokenService>(); //Cria novo objeto a cada requisição
+builder.Services.AddSingleton<NE_Usuario>();
+builder.Services.AddTransient<TokenService>(); //Cria novo objeto a cada requisição em cada metodo
 
 var app = builder.Build();
 

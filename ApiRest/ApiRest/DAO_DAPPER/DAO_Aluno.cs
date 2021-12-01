@@ -8,7 +8,7 @@ namespace ApiRest.DAO_DAPPER
 {
     public class DAO_Aluno
     {
-        const string CONNECTION_STRING = "data source=localhost;initial catalog=TESTE;Persist Security Info=True;Connection Timeout=60;User ID=sa;Password=boi228369";
+        
 
         public Aluno CadastrarAluno(Aluno alu)
         {
@@ -20,7 +20,7 @@ namespace ApiRest.DAO_DAPPER
                                                 VALUES (@nome, @telefone)"; //NUCA CONCATENAR STRING AQUI, PELA MOR DE DEUS ....
 
 
-                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection conexao = new SqlConnection(Configuracao.CONNECTION_STRING))
                 {
                     var retornoAluno = conexao.ExecuteScalar(sqlAluno, alu);
                     alu.Id = Convert.ToInt32(retornoAluno);
@@ -57,7 +57,7 @@ namespace ApiRest.DAO_DAPPER
 
             try
             {
-                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection conexao = new SqlConnection(Configuracao.CONNECTION_STRING))
                 {
                     alu = conexao.Query<Aluno>(sql, alu).FirstOrDefault();
 
@@ -83,7 +83,7 @@ namespace ApiRest.DAO_DAPPER
 
             try
             {
-                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection conexao = new SqlConnection(Configuracao.CONNECTION_STRING))
                 {
                     listaAlunos = conexao.Query<Aluno>(sql).AsList();
                 }
@@ -110,7 +110,7 @@ namespace ApiRest.DAO_DAPPER
                                      WHERE id = @id";
 
 
-                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection conexao = new SqlConnection(Configuracao.CONNECTION_STRING))
                 {
                     var retornoAluno = conexao.Execute(sqlAluno, alu);
                     //alu.IdAluno = Convert.ToInt32(retornoAluno);
@@ -148,7 +148,7 @@ namespace ApiRest.DAO_DAPPER
             {
                 string sql = "DELETE FROM ALUNOS WHERE id = @id";
 
-                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                using (SqlConnection conexao = new SqlConnection(Configuracao.CONNECTION_STRING))
                 {
                     var retornoAluno = conexao.Execute(sql, alu);
                     linhasAfetadas = Convert.ToInt32(retornoAluno);

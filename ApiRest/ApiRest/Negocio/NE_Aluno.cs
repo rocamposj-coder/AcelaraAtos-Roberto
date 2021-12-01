@@ -3,7 +3,7 @@ using ApiRest.Entidades;
 
 namespace ApiRest.Negocio
 {
-    public class NE_Aluno : INE_Aluno
+    public class NE_Aluno 
     {
         private DAO_Aluno daoAluno;
 
