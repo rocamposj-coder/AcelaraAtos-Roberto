@@ -55,7 +55,7 @@ namespace ApiRest
             
         }
 
-       
+       /*
         [Authorize (Roles = "admin")]
         [HttpGet("v1/admin")]
         public IActionResult GetAdmin() => Ok(User.Identity.Name);

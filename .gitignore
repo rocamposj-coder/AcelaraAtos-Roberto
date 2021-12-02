@@ -70,3 +70,5 @@
 /ApiRest/.vscode
 /ApiRest/WebApplication1/bin/Debug/net6.0
 /ApiRest/WebApplication1/obj
+/ApiRest/GeradorToken/bin/Debug/net6.0
+/ApiRest/GeradorToken/obj
