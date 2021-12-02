@@ -54,7 +54,7 @@ namespace AcessoDapper
 
             //INserindo alunos
             Aluno alu = new Aluno();
-            alu.Nome = "Homem Arana";
+            alu.Nome = "Hulk Esmaga";
             alu.Telefone = "4545-4545";
 
             var listaTelefone = new List<Telefone>
@@ -75,9 +75,9 @@ namespace AcessoDapper
                 Numero = "123"
             };
 
-            alu = daoAluno.InserirAluno(alu);
+            //alu = daoAluno.InserirAluno(alu);
 
-            alu = daoAluno.InserirAlunoTelefone(alu);
+            //alu = daoAluno.InserirAlunoTelefone(alu);
 
             alu = daoAluno.InserirAlunoTelefoneEndereco(alu);
 
