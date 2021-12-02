@@ -1,6 +1,7 @@
 ﻿using AcessoEntity.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace AcessoEntity
@@ -18,6 +19,23 @@ namespace AcessoEntity
                         .Include(a => a.Telefones)
                         .Include(a => a.Enderecos)
                         .ToList();
+
+
+
+            var aluno = new Aluno();
+            aluno.Nome = "Napoleao Bonaparte";
+            aluno.Enderecos = new List<Endereco>() 
+            { 
+                new Endereco() { Logradouro = "Rua Oito", Cep="32341-070", Numero="345"  }                
+            };
+            aluno.Telefones = new List<Telefone>()
+            {
+                new Telefone () {NumeroTelefone = "2222-22222"  },
+                new Telefone () {NumeroTelefone = "3333-33333"  }
+            };
+
+            context.Alunos.Add(aluno);
+            context.SaveChanges();
 
 
 
