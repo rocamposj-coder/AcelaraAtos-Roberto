@@ -8,8 +8,6 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 var key = Encoding.ASCII.GetBytes(Configuracao.JwtKey);
-
-
 //Utilizado para autenticar
 builder.Services.AddAuthentication(x =>
 {

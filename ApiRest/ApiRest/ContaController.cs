@@ -55,16 +55,16 @@ namespace ApiRest
             
         }
 
-        /*
+       
         [Authorize (Roles = "admin")]
         [HttpGet("v1/admin")]
         public IActionResult GetAdmin() => Ok(User.Identity.Name);
-
+        
+        
         [Authorize(Roles = "user")]
-        //[Authorize(Roles = "admin")]
+        [Authorize(Roles = "admin")]
         [HttpGet("v1/usuario")]
         public IActionResult GetUsuario() => Ok(User.Identity.Name);
-
 
         [Authorize(Roles = "caochupandomanga")]
         [HttpGet("v1/cao")]
