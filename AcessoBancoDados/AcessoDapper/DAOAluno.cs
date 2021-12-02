@@ -435,9 +435,42 @@ namespace AcessoDapper
 
 
             return alu;
-        }                   
+        }
 
-        public List<Aluno> RecuperarAlunosEnderecos()
+
+        public Aluno RecuperarAlunoEndereco(Aluno alu)
+        {
+
+            string sql = @"SELECT Alunos.id, nome,telefone, Endereco.id, logradouro, cep, numero
+                            from Alunos 
+                            INNER JOIN Endereco ON Endereco.idAluno = Alunos.id                         
+                            Where Alunos.id = @id"; 
+
+            try
+            {
+                using (SqlConnection conexao = new SqlConnection(CONNECTION_STRING))
+                {                    
+                    var items = conexao.Query<Aluno, Endereco, Aluno>(sql,
+                       (aluno, endereco) =>
+                       {
+                           aluno.Endereco = endereco;
+                           return aluno;
+                       },alu);
+
+                    alu = items.FirstOrDefault();   // a consulta so traz um registro porque filtra pelo ID
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);               
+                return null;
+            }
+
+            return alu;
+        }
+
+        public List<Aluno> RecuperarAlunosEndereco()
         {
             List<Aluno> listaAlunos;
 

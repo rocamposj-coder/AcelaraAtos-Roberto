@@ -25,7 +25,11 @@ namespace AcessoDapper
 
           DAOAluno daoAluno = new DAOAluno();
 
-            
+
+            var alunoCompleto = daoAluno.RecuperarAlunoEndereco(new Aluno { Id = 63 });
+
+
+
           List<Aluno> listaAluno  = new List<Aluno>() 
           { 
            new Aluno() { Id = 44},
@@ -44,7 +48,7 @@ namespace AcessoDapper
             //Basica
             List<Aluno> listaAlunos = daoAluno.RecuperarAlunos();// RecuperarAlunos();
             //Com join
-            listaAlunos = daoAluno.RecuperarAlunosEnderecos();
+            listaAlunos = daoAluno.RecuperarAlunosEndereco();
             listaAlunos = daoAluno.RecuperarAlunosTelefones();
             //Dois Joins
             listaAlunos = daoAluno.RecuperarAlunosTelefonesEndereco();

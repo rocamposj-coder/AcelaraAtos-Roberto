@@ -73,3 +73,5 @@
 /ApiRest/GeradorToken/bin/Debug/net6.0
 /ApiRest/GeradorToken/obj
 /AcessoBancoDados/AcessoEntity/bin/Debug/net6.0
+/ApiRest/ApiQueExigeAutenticacao/bin/Debug/net6.0
+/ApiRest/ApiQueExigeAutenticacao/obj

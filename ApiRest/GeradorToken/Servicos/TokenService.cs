@@ -20,10 +20,7 @@ namespace GeradorToken.Servicos
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, user.Nome)             //User.Identity.Name
-                    //new Claim(ClaimTypes.Role, "admin"),            //User.IsInRole
-                    //new Claim(ClaimTypes.Role, "caochupandomanga"), //User.IsInRole
-                   
+                    new Claim(ClaimTypes.Name, user.Nome) //User.Identity.Name
                 }),                
                 Expires = DateTime.UtcNow.AddHours(8),
                 SigningCredentials = new SigningCredentials(
