@@ -75,3 +75,7 @@
 /AcessoBancoDados/AcessoEntity/bin/Debug/net6.0
 /ApiRest/ApiQueExigeAutenticacao/bin/Debug/net6.0
 /ApiRest/ApiQueExigeAutenticacao/obj
+/AcessoBancoDados/LinqLambda/bin/Debug/net6.0
+/AcessoBancoDados/LinqLambda/obj
+/WebApplication1/ApiAutenticada/obj
+/WebApplication1/.vs/WebApplication1
