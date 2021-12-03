@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LinqLambda
 {
-    public class Disciplina : IComparable<Disciplina>
+    public class Disciplina //: IComparable<Disciplina>
     {
         public int id;
         public string nome;

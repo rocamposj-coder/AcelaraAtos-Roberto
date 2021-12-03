@@ -40,17 +40,17 @@ namespace LinqLambda
 
             Clube clb = new Clube();
             clb = new Clube(); clb.nome = "Atlético-MG   "; clb.pontos = 81; clb.vitorias = 25; clb.saldo = 33; listaClubes.Add(clb);
-            clb = new Clube(); clb.nome = "Sport         "; clb.pontos = 33; clb.vitorias = 8; clb.saldo = -14; listaClubes.Add(clb);
+            clb = new Clube(); clb.nome = "Sport         "; clb.pontos = 39; clb.vitorias = 8; clb.saldo = -14; listaClubes.Add(clb);
             clb = new Clube(); clb.nome = "Santos        "; clb.pontos = 46; clb.vitorias = 11; clb.saldo = -6; listaClubes.Add(clb);
             clb = new Clube(); clb.nome = "Flamengo      "; clb.pontos = 70; clb.vitorias = 21; clb.saldo = 36; listaClubes.Add(clb);
             clb = new Clube(); clb.nome = "Bahia         "; clb.pontos = 40; clb.vitorias = 10; clb.saldo = -10; listaClubes.Add(clb);
             clb = new Clube(); clb.nome = "São Paulo     "; clb.pontos = 45; clb.vitorias = 10; clb.saldo = -8; listaClubes.Add(clb);
             clb = new Clube(); clb.nome = "Internacional "; clb.pontos = 48; clb.vitorias = 12; clb.saldo = 4; listaClubes.Add(clb);
             clb = new Clube(); clb.nome = "Corinthians   "; clb.pontos = 56; clb.vitorias = 15; clb.saldo = 5; listaClubes.Add(clb);
-            clb = new Clube(); clb.nome = "Grêmio        "; clb.pontos = 39; clb.vitorias = 11; clb.saldo = -8; listaClubes.Add(clb);
-            clb = new Clube(); clb.nome = "Fluminense    "; clb.pontos = 51; clb.vitorias = 14; clb.saldo = -1; listaClubes.Add(clb);
+            clb = new Clube(); clb.nome = "Grêmio        "; clb.pontos = 39; clb.vitorias = 8; clb.saldo = -8; listaClubes.Add(clb);
+            clb = new Clube(); clb.nome = "Fluminense    "; clb.pontos = 45; clb.vitorias = 14; clb.saldo = -1; listaClubes.Add(clb);
             clb = new Clube(); clb.nome = "Palmeiras     "; clb.pontos = 62; clb.vitorias = 19; clb.saldo = 14; listaClubes.Add(clb);
-            clb = new Clube(); clb.nome = "Frotaleza     "; clb.pontos = 52; clb.vitorias = 15; clb.saldo = -2; listaClubes.Add(clb);
+            clb = new Clube(); clb.nome = "Ceara         "; clb.pontos = 52; clb.vitorias = 15; clb.saldo = -2; listaClubes.Add(clb);
 
 
 
@@ -72,6 +72,8 @@ namespace LinqLambda
                 Console.Write(i + " ");
             }
 
+           
+
 
             /**************************************************************************************************/
 
@@ -80,7 +82,7 @@ namespace LinqLambda
             Console.WriteLine("\n\n Segundo Exemplo com lambda");
             List<Disciplina> listaDis = carregarDisciplinas();
 
-            foreach (Disciplina dis in listaDis.Where(x => x.id >= 2).OrderByDescending(x => x))
+            foreach (Disciplina dis in listaDis.Where(x => x.id >= 2).OrderByDescending(x => x.id))
             {
                 Console.WriteLine("ID:" + dis.id + " Nome: " + dis.nome + " ");
             }
@@ -103,7 +105,9 @@ namespace LinqLambda
 
             //Quarto Exemplo
             Console.WriteLine("\nQuarto Exemplo com lambda"); //So para quebrar uma linha            
-            foreach (Disciplina dis in listaDis.Where(x => x.nome.StartsWith("Plata") && x.id < 2))
+            var listaFiltrada = listaDis.Where(d => d.nome.StartsWith("Plata") && d.id < 2);
+
+            foreach (Disciplina dis in listaFiltrada)
             {
                 Console.WriteLine("ID:" + dis.id + " Nome: " + dis.nome + " ");
             }
@@ -118,7 +122,9 @@ namespace LinqLambda
             Console.WriteLine("\nQuinto Exemplo com lambda"); //So para quebrar uma linha            
             string[] alimentos = { "arroz", "feijão", "brocolis", "carne", "batata", "beterraba", "banana", "Camarão", "figo" };
 
-            foreach (IGrouping<char, string> ali in alimentos.GroupBy(item => char.ToUpper(item[0])))
+            var grupos = alimentos.GroupBy(item => char.ToUpper(item[0]));
+
+            foreach (IGrouping<char, string> ali in grupos)
             {
                 Console.WriteLine();
                 for (int i = 0; i < ali.Count(); i++)
@@ -127,7 +133,7 @@ namespace LinqLambda
                 }
             }
 
-
+           
 
             /**************************************************************************************************/
 
@@ -170,7 +176,7 @@ namespace LinqLambda
             Console.WriteLine("\n Setimo Exemplo ...");
 
             //Veja este exemplo:
-            //Seguindo os critérios de desempate esta deveria ser a ordem ...			
+            //Seguindo os critérios de desempate este seria um exemplo ...			
             /*
             Nome         pontos  vitorias  saldo
             Atletico      49 		15 	 	24 	
