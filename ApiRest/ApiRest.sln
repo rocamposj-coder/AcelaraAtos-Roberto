@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiRest", "ApiRest\ApiRest.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeradorToken", "GeradorToken\GeradorToken.csproj", "{DC3D37CB-8AE5-419E-93F3-16D026A25FD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiQueExigeAutenticacao", "ApiQueExigeAutenticacao\ApiQueExigeAutenticacao.csproj", "{B4D42F53-C30D-4FD0-8BB5-D843C80532B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiQueExigeAutenticacao", "ApiQueExigeAutenticacao\ApiQueExigeAutenticacao.csproj", "{B4D42F53-C30D-4FD0-8BB5-D843C80532B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsumidorRest", "ConsumidorRest\ConsumidorRest.csproj", "{4256BB42-EA06-42E1-98D0-51DCF0537CEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{B4D42F53-C30D-4FD0-8BB5-D843C80532B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4D42F53-C30D-4FD0-8BB5-D843C80532B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4D42F53-C30D-4FD0-8BB5-D843C80532B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4256BB42-EA06-42E1-98D0-51DCF0537CEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4256BB42-EA06-42E1-98D0-51DCF0537CEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4256BB42-EA06-42E1-98D0-51DCF0537CEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4256BB42-EA06-42E1-98D0-51DCF0537CEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
