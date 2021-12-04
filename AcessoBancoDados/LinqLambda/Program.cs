@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LinqLambda.Entidades;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,6 +33,31 @@ namespace LinqLambda
 
             return lista;
 
+        }
+
+        static List<Aluno> CarregarAlunos()
+        { 
+            List<Aluno> listaAlunos =   new List<Aluno>();
+
+            for (int i = 0; i < 10; i++)
+            { 
+                Aluno alu = new Aluno();  
+                alu.Id = i;
+                alu.Nome = "Nome" + i;
+                
+                for(int j=0; j<3; j++) 
+                {
+                    Telefone telefone = new Telefone();
+                    telefone.Id = j;
+                    telefone.Numero = $"{j}{i}{j}{i}-{j}{i}{j}{i}";
+                    telefone.IdAluno = alu.Id;
+                    alu.ListaTelefones.Add(telefone);
+                }
+
+                listaAlunos.Add(alu);
+            }
+
+            return  listaAlunos;
         }
 
         static List<Clube> carregaClubes()
@@ -204,6 +230,21 @@ namespace LinqLambda
 
             //Gostaria de apresentar esta coleção na ordem adequada, seguindo os critérios de desempate.
             //Através de uma consulta Lambda ou Linq ...
+
+
+
+
+
+
+            /**************************************************************************************************/
+            Console.WriteLine("\n Oitavo Exemplo ...");
+            List<Aluno> listaAlunos = CarregarAlunos();
+
+            var query = from alu in listaAlunos
+                        where alu.Id >= 4 
+                        select alu;
+
+            var lista = query.ToList();
 
 
 
