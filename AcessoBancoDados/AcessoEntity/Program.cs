@@ -68,9 +68,24 @@ namespace AcessoEntity
 
 
             var listaAlunos = context.Alunos
-                        .Include(a => a.Telefones.Where(t=>t.Id == 63))
+                        .Include(a => a.Telefones.Where(t=>t.Id == 94))
                         .Include(a => a.Enderecos)
                         .ToList();
+
+     
+            var listaTels = context.Telefones.Where(t => t.Id == 94)
+                                .Include(t => t.IdAlunoNavigation)
+                                .ToList();
+
+            var query1 = from alu in context.Alunos
+                         join tel in context.Telefones on alu.Id equals tel.IdAluno
+                         where tel.Id == 94 
+                         select alu;
+
+            var lista2 = query1.ToList();
+
+
+          
 
 
 
