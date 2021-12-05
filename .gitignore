@@ -82,3 +82,6 @@
 /ApiRest/ConsumidorRest/bin/Debug/net6.0
 /ApiRest/ConsumidorRest/obj
 /ConsoleApp1
+/AcessoBancoDados/EntityDataAnnotations/bin/Debug/net6.0
+/AcessoBancoDados/EntityDataAnnotations/obj
+/AcessoBancoDados/EntityFluent/obj
