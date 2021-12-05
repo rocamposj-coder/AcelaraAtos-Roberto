@@ -27,6 +27,12 @@ namespace EntityDataAnnotations
         [Column("cpf", TypeName = "VARCHAR")]
         public string Cpf { get; set; }
 
-       
-     }
+        [Required]
+        [MinLength(4)]
+        [MaxLength(20)]
+        [Column("endereco", TypeName = "VARCHAR")]
+        public string Endereco { get; set; }
+
+
+    }
 }

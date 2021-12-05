@@ -11,11 +11,14 @@ namespace EntityDataAnnotations
     [Table("Professor")]
     public class Professor
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         
         public String Nome { get; set; }
         
         public string Cpf { get; set; }
+
+        public DateTime DataRegistro { get; set; }
+        public List<Disciplina> Disciplinas { get; set; }
 
        
      }
