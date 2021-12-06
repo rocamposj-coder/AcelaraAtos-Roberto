@@ -11,9 +11,9 @@ namespace EntityFluent
         static void DeletaCriaBanco()
         {
             ATOSContext contexto = new ATOSContext();
-            contexto.Database.EnsureDeleted(); //Deleta as tabelas do banco
+            contexto.Database.EnsureDeleted(); //Deleta o banco
 
-            contexto.Database.EnsureCreated(); //cria as tabelas no banco
+            contexto.Database.EnsureCreated(); //cria o banco com base nos mapeamentos
         }
 
         static void TestandoInseirMuitosParaMuitos()
