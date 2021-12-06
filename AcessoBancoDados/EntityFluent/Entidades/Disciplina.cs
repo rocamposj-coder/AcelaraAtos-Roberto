@@ -17,7 +17,7 @@ namespace EntityDataAnnotations
 
         public int CargaHoraria { get; set; }
 
-        public long IdProfessor { get; set; }
+        //public long IdProfessor { get; set; }
         //public Professor Professor { get; set; }
 
         public List<Professor> Professores { get; set; }
