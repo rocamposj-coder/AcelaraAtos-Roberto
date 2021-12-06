@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace EntityFluent
 {
@@ -28,23 +29,26 @@ namespace EntityFluent
             };
 
 
-            var disciplina = new Disciplina()
+            var listaDisciplinas = new List<Disciplina>()
             {
-                CargaHoraria = 60,
-                Nome = "Introdução ao C#",
-                Professores = listaProfessor
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao C#", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao Java", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao Node", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao Angular", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao SQL Server", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao Oracle", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao C", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao C++", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao Flutter", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao Dart", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao Xamarin Forms", Professores = listaProfessor },
+               new Disciplina(){ CargaHoraria = 60, Nome = "Introdução ao PHP", Professores = listaProfessor }
+
             };
+        
+   
 
-
-            var disciplina2 = new Disciplina()
-            {
-                CargaHoraria = 60,
-                Nome = "Introdução ao Java",
-                Professores = listaProfessor
-            };
-
-            contexto.Disciplinas.Add(disciplina);
-            contexto.Disciplinas.Add(disciplina2);
+            contexto.Disciplinas.AddRange(listaDisciplinas);
             contexto.SaveChanges();
 
         }
@@ -96,9 +100,48 @@ namespace EntityFluent
 
         }
 
+        //PAGINAÇÃO
+        static List<Disciplina> RecuperarDisicplinas(int skip = 0, int take = 5)
+        {
+            ATOSContext context = new ATOSContext();
+            var listaDisciplinas = context
+                .Disciplinas
+                .AsNoTracking()
+                .Skip(skip)
+                .Take(take)
+                .ToList();
+
+            return listaDisciplinas;
+
+            /*
+            var listaDisciplinas = RecuperarDisicplinas();
+            listaDisciplinas = RecuperarDisicplinas(5, 10);
+            listaDisciplinas = RecuperarDisicplinas(10);
+            */
+
+        }
+
+        //PARALELISMO
+        static async Task RecuperaDisciplinas(List<Professor> listaProfessores, List<Disciplina> listaDisciplinas)
+        {
+            ATOSContext context = new ATOSContext();            
+            listaDisciplinas = await context.Disciplinas.ToListAsync();   
+            listaProfessores = await context.Professores.ToListAsync();            
+        }
+
+
+        //QUERY MANUAL
+        static List<Professor> RecuperarProfessor()
+        {
+            ATOSContext context = new ATOSContext();
+            var listaProfessor = context.Professores.FromSqlRaw("select * from professor").ToList();
+            return listaProfessor;
+        }
+
         static void Main(string[] args)
         {
-            DeletaCriaBanco();
+            var lista = RecuperarProfessor();
+
             Console.WriteLine("Hello Many to Many !");
         }
     }
