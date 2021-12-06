@@ -8,16 +8,13 @@ namespace EntityDataAnnotations
         static void Main(string[] args)
         {
             ATOSContext context = new ATOSContext();
-           /*
+           
             context.Database.EnsureDeleted();
-            context.SaveChanges();
-           */
+            context.SaveChanges();           
             
             var sql = context.Database.GenerateCreateScript();
 
-            context.Database.EnsureCreated();
-
-            
+            context.Database.EnsureCreated();            
 
             Professor prof = new Professor();
             prof.Cpf = "00000000191";
