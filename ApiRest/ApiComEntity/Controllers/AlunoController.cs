@@ -36,7 +36,7 @@ namespace ApiComEntity.Controllers
                 var aluno = await context.Alunos.Where(a => a.Id == id).FirstOrDefaultAsync();
                 if (aluno == null)
                     return NotFound(new ResultViewModel<Aluno>("Conteudo não encontrado."));
-                
+
                 return Ok(new ResultViewModel<Aluno>(aluno));
             }
             catch (Exception ex)
@@ -44,15 +44,15 @@ namespace ApiComEntity.Controllers
                 return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
             }
         }
-    
 
 
 
-    // POST api/<AlunoController>
-    [HttpPost]
-    public async Task<IActionResult> Post([FromServices] TESTEContext context,
-                                          [FromBody] EditorAlunoViewModel value)
-    {
+
+        // POST api/<AlunoController>
+        [HttpPost]
+        public async Task<IActionResult> Post([FromServices] TESTEContext context,
+                                              [FromBody] EditorAlunoViewModel value)
+        {
             /*if(!ModelState.IsValid)
                 return BadRequest(ModelState.Values);*/
 
@@ -61,73 +61,76 @@ namespace ApiComEntity.Controllers
                 return BadRequest(new ResultViewModel<Aluno>(ModelState.RecuperarErros()));
 
             try
-        {
+            {
                 Aluno aluno = new Aluno()
-                { 
+                {
                     Id = 0,
                     Nome = value.Nome,
                     Telefone = value.Telefone,
                     Enderecos = null,
-                    Telefones = null                    
+                    Telefones = null
                 };
 
-            await context.Alunos.AddAsync(aluno);
-            await context.SaveChangesAsync();
+                await context.Alunos.AddAsync(aluno);
+                await context.SaveChangesAsync();
 
-            return Created($"/{aluno.Id}", aluno);
+                return Created($"/{aluno.Id}", new ResultViewModel<Aluno>(aluno));
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new ResultViewModel<Aluno>("Falha ao inserir o aluno."));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
+            }
         }
-        catch (DbUpdateException ex)
+
+        // PUT api/<AlunoController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromServices] TESTEContext context,
+                        [FromRoute] int id,
+                        [FromBody] EditorAlunoViewModel value)
         {
-            return StatusCode(500, new ResultViewModel<Aluno>("Falha ao inserir o aluno.")); 
+            //Metodo de extenção
+            if (!ModelState.IsValid)
+                return BadRequest(new ResultViewModel<Aluno>(ModelState.RecuperarErros()));
+
+            try
+            {
+
+                //Tem que buscar com entity para poder atualizar
+                var aluno = await context
+                    .Alunos
+                    .FirstOrDefaultAsync(a => a.Id == id);
+
+                if (aluno == null)
+                    return NotFound(new ResultViewModel<Aluno>("Conteudo não encontrado."));
+
+                aluno.Nome = value.Nome;
+                aluno.Telefone = value.Telefone;
+
+                context.Alunos.Update(aluno);
+                await context.SaveChangesAsync();
+
+                return Ok(new ResultViewModel<Aluno>(aluno));
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, new ResultViewModel<Aluno>("Falha ao atualizar o aluno."));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
+            }
+
         }
-        catch (Exception ex)
+
+        // DELETE api/<AlunoController>/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromServices] TESTEContext context,
+                                                [FromRoute] int id)
         {
-            return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
-        }
-    }
-
-    // PUT api/<AlunoController>/5
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Put([FromServices] TESTEContext context,
-                    [FromRoute] int id,
-                    [FromBody] EditorAlunoViewModel value)
-    {
-
-        try
-        {
-
-            //Tem que buscar com entity para poder atualizar
-            var aluno = await context
-                .Alunos
-                .FirstOrDefaultAsync(a => a.Id == id);
-
-            if (aluno == null)
-                return NotFound();
-
-            aluno.Nome = value.Nome;
-            aluno.Telefone = value.Telefone;
-
-            context.Alunos.Update(aluno);
-            await context.SaveChangesAsync();
-
-            return Ok(aluno);
-        }
-        catch (DbUpdateException ex)
-        {
-            return StatusCode(500, new ResultViewModel<Aluno>("Falha ao atualizar o aluno.")); 
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
-        }
-
-    }
-
-    // DELETE api/<AlunoController>/5
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete([FromServices] TESTEContext context,
-                                            [FromRoute] int id)
-    {
 
             try
             {
@@ -137,12 +140,12 @@ namespace ApiComEntity.Controllers
                     .FirstOrDefaultAsync(a => a.Id == id);
 
                 if (aluno == null)
-                    return NotFound();
+                    return NotFound(new ResultViewModel<Aluno>("Conteudo não encontrado."));
 
                 context.Alunos.Remove(aluno);
                 await context.SaveChangesAsync();
 
-                return Ok(aluno);
+                return Ok(new ResultViewModel<Aluno>(aluno));
             }
             catch (DbUpdateException ex)
             {
@@ -154,5 +157,5 @@ namespace ApiComEntity.Controllers
             }
         }
 
-}
+    }
 }
