@@ -1,4 +1,5 @@
 using ApiComEntity.Models;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,8 +14,16 @@ builder.
 
 builder.Services.AddDbContext<TESTEContext>();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
 var app = builder.Build();
 
+app.UseSwagger();
+
 app.MapControllers();
+
+app.UseSwaggerUI();
 
 app.Run();
