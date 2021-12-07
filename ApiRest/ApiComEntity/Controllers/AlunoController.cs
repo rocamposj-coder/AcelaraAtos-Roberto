@@ -1,4 +1,5 @@
-﻿using ApiComEntity.Models;
+﻿using ApiComEntity.Extensions;
+using ApiComEntity.Models;
 using ApiComEntity.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -32,12 +33,15 @@ namespace ApiComEntity.Controllers
         {
             try
             {
-                var listaAlunos = await context.Alunos.Where(a => a.Id == id).FirstOrDefaultAsync();
-                return Ok(listaAlunos);
+                var aluno = await context.Alunos.Where(a => a.Id == id).FirstOrDefaultAsync();
+                if (aluno == null)
+                    return NotFound(new ResultViewModel<Aluno>("Conteudo não encontrado."));
+                
+                return Ok(new ResultViewModel<Aluno>(aluno));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Erro interno.");
+                return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
             }
         }
     
@@ -49,10 +53,14 @@ namespace ApiComEntity.Controllers
     public async Task<IActionResult> Post([FromServices] TESTEContext context,
                                           [FromBody] EditorAlunoViewModel value)
     {
-            if(!ModelState.IsValid)
-                return BadRequest();
+            /*if(!ModelState.IsValid)
+                return BadRequest(ModelState.Values);*/
 
-        try
+            //Metodo de extenção
+            if (!ModelState.IsValid)
+                return BadRequest(new ResultViewModel<Aluno>(ModelState.RecuperarErros()));
+
+            try
         {
                 Aluno aluno = new Aluno()
                 { 
@@ -70,11 +78,11 @@ namespace ApiComEntity.Controllers
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, "Falha ao inserir o aluno.");
+            return StatusCode(500, new ResultViewModel<Aluno>("Falha ao inserir o aluno.")); 
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Erro interno.");
+            return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
         }
     }
 
@@ -106,11 +114,11 @@ namespace ApiComEntity.Controllers
         }
         catch (DbUpdateException ex)
         {
-            return StatusCode(500, "Falha ao atualizar o aluno.");
+            return StatusCode(500, new ResultViewModel<Aluno>("Falha ao atualizar o aluno.")); 
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Erro interno.");
+            return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
         }
 
     }
@@ -138,11 +146,11 @@ namespace ApiComEntity.Controllers
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, "Falha ao remover o aluno.");
+                return StatusCode(500, new ResultViewModel<Aluno>("Falha ao remover o aluno."));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Erro interno.");
+                return StatusCode(500, new ResultViewModel<Aluno>("Erro interno."));
             }
         }
 
