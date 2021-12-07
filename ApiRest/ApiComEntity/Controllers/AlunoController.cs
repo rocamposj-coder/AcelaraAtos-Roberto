@@ -12,6 +12,11 @@ namespace ApiComEntity.Controllers
     public class AlunoController : ControllerBase
     {
         // GET: api/<AlunoController>
+        /// <summary>
+        /// Recupera uma lista de Alunos
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAsync([FromServices] TESTEContext context)
         {
@@ -49,9 +54,26 @@ namespace ApiComEntity.Controllers
 
 
         // POST api/<AlunoController>
+        /// <summary>
+        /// Cadastra um Aluno.
+        /// </summary>
+        /// <param name="EditorAlunoViewModel"></param>
+        /// <returns>O novo aluno cadastrado</returns>
+        /// <remarks>
+        /// Chamda Exemplo:
+        ///
+        ///     POST /Aluno
+        ///     {    
+        ///       "nome": "Raimundo NoNato",
+        ///       "telefone":"3434-3434"
+        ///     }
+        ///
+        /// </remarks>
+        /// <response code="201">Retorna o novo aluno cadastrado</response>
+        /// <response code="400">Se o retorno é null</response>
         [HttpPost]
         public async Task<IActionResult> Post([FromServices] TESTEContext context,
-                                              [FromBody] EditorAlunoViewModel value)
+                                                  [FromBody] EditorAlunoViewModel value)
         {
             /*if(!ModelState.IsValid)
                 return BadRequest(ModelState.Values);*/
