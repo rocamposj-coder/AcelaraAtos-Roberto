@@ -42,7 +42,7 @@ namespace EntityFluent.Data.Mappings
                 .HasColumnName("dataRegistro")
                 .HasColumnType("SMALLDATETIME")
                 .HasDefaultValueSql("GETDATE()"); //FUNÇÂO DO SQL SERVER
-                                                  //.HasDefaultValue(DateTime.Now);
+              //.HasDefaultValue(DateTime.Now);
 
             //Relacionamento um para muitos
             /*builder.HasMany(p => p.Disciplinas)
@@ -61,13 +61,13 @@ namespace EntityFluent.Data.Mappings
                      prof => prof
                          .HasOne<Disciplina>()
                          .WithMany()
-                         .HasForeignKey("ProfessorId")
+                         .HasForeignKey("DisciplinaId")
                          .HasConstraintName("FK_ProfDisci_ProfessorID")
                          .OnDelete(DeleteBehavior.Cascade),
                      disc => disc
                          .HasOne<Professor>()
                          .WithMany()
-                         .HasForeignKey("DisciplinaId")
+                         .HasForeignKey("ProfessorId")
                          .HasConstraintName("FK_ProfDisci_DisciplinaID")
                          .OnDelete(DeleteBehavior.Cascade));
             

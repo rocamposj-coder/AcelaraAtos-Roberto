@@ -87,9 +87,7 @@ namespace EntityFluent
             {
                 Console.WriteLine($"PROF:{prof.Id} {prof.Nome} {prof.Cpf} {prof.DataRegistro}");
 
-                var listaDisciplinas = prof.Disciplinas;
-
-                foreach (var disci in listaDisciplinas)
+                foreach (var disci in prof.Disciplinas)
                 {
                     Console.WriteLine($"DISCI: {disci.Id} {disci.Nome} {disci.CargaHoraria} ");
                 }
@@ -129,7 +127,6 @@ namespace EntityFluent
             listaProfessores = await context.Professores.ToListAsync();            
         }
 
-
         //QUERY MANUAL
         static List<Professor> RecuperarProfessor()
         {
@@ -140,7 +137,11 @@ namespace EntityFluent
 
         static void Main(string[] args)
         {
-            var lista = RecuperarProfessor();
+            
+             var listaDisciplinas = RecuperarDisicplinas();
+             listaDisciplinas = RecuperarDisicplinas(5, 10);
+             listaDisciplinas = RecuperarDisicplinas(10);
+            
 
             Console.WriteLine("Hello Many to Many !");
         }

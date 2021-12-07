@@ -31,6 +31,6 @@ app.UseAuthentication();   //Quem vc é ?
 app.UseAuthorization();    //O que vc pode fazer no sistema ?
 app.MapControllers();      //mapear todos os controllers
 
-app.MapGet("/", () => "Hello World!");
+//app.MapGet("/", () => "Hello World!");
 
 app.Run();

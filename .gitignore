@@ -86,3 +86,5 @@
 /AcessoBancoDados/EntityDataAnnotations/obj
 /AcessoBancoDados/EntityFluent/obj
 /AcessoBancoDados/EntityFluent/bin/Debug/net6.0
+/ApiRest/ApiComEntity/bin/Debug/net6.0
+/ApiRest/ApiComEntity/obj
