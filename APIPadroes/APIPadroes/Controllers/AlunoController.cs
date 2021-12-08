@@ -1,4 +1,5 @@
-﻿using APIPadroes.Models;
+﻿using ApiComEntity.Extensions;
+using APIPadroes.Models;
 using APIPadroes.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,14 +12,22 @@ namespace APIPadroes.Controllers
     [ApiController]
     public class AlunoController : ControllerBase
     {   
+
         // GET: api/<AlunoController>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> GetAsync([FromServices] TESTEContext context)
         {
             try
-            {
+            {             
                 var listaAlunos = await context.Alunos.ToListAsync();
-                //return Ok(listaAlunos);
+                if(listaAlunos == null)
+                    return NotFound(new RetornoViewModel<Aluno>("Nenhum aluno na base"));
+
                 return Ok(new RetornoViewModel<List<Aluno>>(listaAlunos));
             }
             catch (Exception ex)
@@ -44,9 +53,9 @@ namespace APIPadroes.Controllers
                        [FromBody] CadastrarAlunoViewModel value)
         {
 
-            /*if (!ModelState.IsValid)
-                return BadRequest(ModelState.Values);
-            */
+            if (!ModelState.IsValid)
+                return BadRequest(new RetornoViewModel<Aluno>(ModelState.RecuperarErros()));
+
             try
             {
                 Aluno aluno = new Aluno()
@@ -61,15 +70,18 @@ namespace APIPadroes.Controllers
                 await context.Alunos.AddAsync(aluno);
                 context.SaveChangesAsync();
 
-                return Created($"/{aluno.Id}", aluno);
+                //return Created($"/{aluno.Id}", aluno);
+                return Created($"/{aluno.Id}", new RetornoViewModel<Aluno>(aluno));
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, "Falha ao atualizar o registro");
+                //return StatusCode(500, "Falha ao atualizar o registro");
+                return StatusCode(500, new RetornoViewModel<List<Aluno>>("Falha ao atualizar o registro"));
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Erro interno");
+                //return StatusCode(500, "Erro interno");
+                return StatusCode(500, new RetornoViewModel<List<Aluno>>("Erro interno"));
             }
 
 

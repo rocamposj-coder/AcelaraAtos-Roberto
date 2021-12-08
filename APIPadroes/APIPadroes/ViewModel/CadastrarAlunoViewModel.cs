@@ -9,7 +9,7 @@ namespace APIPadroes.ViewModel
 
         //[EmailAddress]
         [Required(ErrorMessage = "O Telefone é obrigatório")]
-        [StringLength(11, MinimumLength = 9, ErrorMessage = "Este campo deve ter entre 9 e 11 caracteres")]
+        [StringLength(11, MinimumLength = 9, ErrorMessage = "O campo telefone deve ter entre 9 e 11 caracteres")]
         public string Telefone { get; set; }
     }
 }
