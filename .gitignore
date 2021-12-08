@@ -93,3 +93,6 @@
 /APIPadroes/APIPadroes/obj
 /ApiRest/ConsumidorAPIRestFlurl/bin/Debug/net5.0
 /ApiRest/ConsumidorAPIRestFlurl/obj
+/ApiRest/ApiRest/bin/Release/net6.0
+/ApiRest/ApiRest/.config
+/ApiRest/ApiRest/Properties/PublishProfiles

@@ -6,64 +6,57 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var key = Encoding.ASCII.GetBytes(Configuracao.JwtKey);
-//Utilizado para autenticar
-builder.Services.AddAuthentication(x =>
-{
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
-{
-    x.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(key),
-        ValidateIssuer = false,   //Utilizandos quando estamos trabalhando a autenticação de varias apis
-        ValidateAudience = false
-    };
-});
-
+ConfigureAuthentication(builder);
+ConfigureServices(builder);
 
 builder.Services.AddControllers();
 
-
-//builder.Services.AddTransient() //Cria novo objeto a cada requisição
-//builder.Services.AddScoped() // objeto criado por transação ( metodos na sequencia das camadas - mesma requisição)
-//builder.Services.AddScoped() // objeto é unico por app
-
-builder.Services.AddSingleton<NE_Usuario>();
-builder.Services.AddTransient<TokenService>(); //Cria novo objeto a cada requisição em cada metodo
-
 var app = builder.Build();
+LoadConfiguration(app);
 
- 
 app.UseAuthentication();   //Quem vc é ?
 app.UseAuthorization();    //O que vc pode fazer no sistema ?
-
 app.MapControllers();
 
-/*
-app.MapGet("/", () => "Alo mundo");
 
-app.MapGet("/{nomeAluno}", (string nomeAluno) =>
-    {
-        return Results.Ok($"Ola {nomeAluno}");
-    });
-
-
-app.MapPost("/", (Usuario user) =>
-    {
-        return Results.Ok(user);
-    });
-
-*/
 app.Run();
 
-/*
-public class Usuario
+
+void LoadConfiguration(WebApplication app)
 {
-    public int Id { get; set; }
-    public string Username { get; set; }
+    Configuracao.JwtKey = app.Configuration.GetValue<string>("JwtKey");
+    Configuracao.ApiKeyName = app.Configuration.GetValue<string>("ApiKeyName");
+    Configuracao.ApiKey = app.Configuration.GetValue<string>("ApiKey");
+    Configuracao.CONNECTION_STRING = app.Configuration.GetValue<string>("CONNECTION_STRING");
+
 }
-*/
+
+void ConfigureAuthentication(WebApplicationBuilder builder)
+{
+    
+    //Utilizado para autenticar
+    builder.Services.AddAuthentication(x =>
+    {
+        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(x =>
+    {
+        var key = Encoding.ASCII.GetBytes(Configuracao.JwtKey);
+
+        x.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,   
+            ValidateAudience = false
+        };
+    });
+
+}
+
+void ConfigureServices(WebApplicationBuilder builder)
+{    
+    builder.Services.AddSingleton<NE_Usuario>();
+    builder.Services.AddTransient<TokenService>(); 
+
+}

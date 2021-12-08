@@ -1,17 +1,25 @@
 using ApiComEntity.Models;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-builder.
-    Services
-    .AddControllers()
-    .ConfigureApiBehaviorOptions(options =>
-    {
-        options.SuppressModelStateInvalidFilter = true; //Não valida mais automaticamente o model state
-    });
+
+builder
+        .Services
+        .AddControllers()
+        .ConfigureApiBehaviorOptions(options => 
+        {
+            options.SuppressModelStateInvalidFilter = true; //Não valida mais automaticamente o model state
+        })
+        .AddJsonOptions(x =>  //Determina como o serializador pad~rão vai trabalhar com o Json cíclico
+        {
+            x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            x.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+        });
+
 
 builder.Services.AddDbContext<TESTEContext>();
 
