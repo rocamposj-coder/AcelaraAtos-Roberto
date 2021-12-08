@@ -88,3 +88,6 @@
 /AcessoBancoDados/EntityFluent/bin/Debug/net6.0
 /ApiRest/ApiComEntity/bin/Debug/net6.0
 /ApiRest/ApiComEntity/obj
+/APIPadroes/APIPadroes/bin/Debug/net6.0
+/APIPadroes/.vs/APIPadroes/v17
+/APIPadroes/APIPadroes/obj
