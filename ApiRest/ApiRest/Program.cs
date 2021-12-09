@@ -4,6 +4,8 @@ using ApiRest.Servicos;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Elmah.Io.AspNetCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureAuthentication(builder);
@@ -17,6 +19,7 @@ LoadConfiguration(app);
 app.UseAuthentication();   //Quem vc é ?
 app.UseAuthorization();    //O que vc pode fazer no sistema ?
 app.MapControllers();
+
 
 
 app.Run();
@@ -57,6 +60,12 @@ void ConfigureAuthentication(WebApplicationBuilder builder)
 void ConfigureServices(WebApplicationBuilder builder)
 {    
     builder.Services.AddSingleton<NE_Usuario>();
-    builder.Services.AddTransient<TokenService>(); 
+    builder.Services.AddTransient<TokenService>();
+
+   builder.Services.AddElmahIo(o => {
+
+        o.ApiKey = "4e0e9d6dc0104d37acc5a801e66747fe";
+        o.LogId = new Guid("fe71769b-9cd2-45d7-ba19-a89ae8d61410");
+    });
 
 }

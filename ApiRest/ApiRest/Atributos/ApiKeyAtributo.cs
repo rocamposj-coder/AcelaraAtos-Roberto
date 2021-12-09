@@ -10,8 +10,8 @@ namespace ApiRest.Atributos
          ActionExecutingContext context,
          ActionExecutionDelegate next)
         {
-            //if (!context.HttpContext.Request.Query.TryGetValue(Configuracao.ApiKeyName, out var extractedApiKey))
-            if (!context.HttpContext.Request.Headers.TryGetValue(Configuracao.ApiKeyName, out var extractedApiKey))
+            if (!context.HttpContext.Request.Query.TryGetValue(Configuracao.ApiKeyName, out var extractedApiKey))
+            //if (!context.HttpContext.Request.Headers.TryGetValue(Configuracao.ApiKeyName, out var extractedApiKey))
             {
                 context.Result = new ContentResult()
                 {
