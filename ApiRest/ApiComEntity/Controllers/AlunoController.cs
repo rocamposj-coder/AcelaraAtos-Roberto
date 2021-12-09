@@ -60,7 +60,7 @@ namespace ApiComEntity.Controllers
         /// <param name="EditorAlunoViewModel"></param>
         /// <returns>O novo aluno cadastrado</returns>
         /// <remarks>
-        /// Chamda Exemplo:
+        /// Chamada Exemplo:
         ///
         ///     POST /Aluno
         ///     {    

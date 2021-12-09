@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder
         .Services
         .AddControllers()
-        .ConfigureApiBehaviorOptions(options => 
+        .ConfigureApiBehaviorOptions(options =>
         {
             options.SuppressModelStateInvalidFilter = true; //Não valida mais automaticamente o model state
         })
@@ -42,6 +42,18 @@ builder.Services.AddSwaggerGen(options =>
             Name = "Example License",
             Url = new Uri("https://example.com/license")
         }
+    });
+
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = @"Cabeçalho de autorização JWT usando o esquema Bearer.
+                        Digite 'Bearer' [espaço] e então seu token na entrada de texto abaixo.
+                        Exemplo:'Bearer 12345abcdef' "
     });
 
     // using System.Reflection;
