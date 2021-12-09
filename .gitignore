@@ -97,3 +97,5 @@
 /ApiRest/ApiRest/.config
 /ApiRest/ApiRest/Properties/PublishProfiles
 /APIPadroes/.vs/APIPadroes
+/ApiRest/TestProject/bin/Debug/net6.0
+/ApiRest/TestProject/obj

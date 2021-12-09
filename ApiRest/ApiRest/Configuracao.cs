@@ -10,6 +10,8 @@
 
         public static string CONNECTION_STRING;// = "data source=localhost;initial catalog=TESTE;Persist Security Info=True;Connection Timeout=60;User ID=sa;Password=boi228369";
 
+        public static bool flagTesteUnitarioDAO = false; //Valor padrão não ativa contrução de classes Mock
+
         public static SmtpConfiguration Smtp = new();
 
         public class SmtpConfiguration

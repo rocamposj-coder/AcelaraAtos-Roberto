@@ -3,18 +3,26 @@ using ApiRest.Entidades;
 
 namespace ApiRest.Negocio
 {
-    public class NE_Aluno 
+    public class NE_Aluno : INE_Aluno
     {
-        private DAO_Aluno daoAluno;
+        private IDAO_Aluno daoAluno;
 
         public NE_Aluno()
         {
-            daoAluno = new DAO_Aluno();
+            daoAluno = FabricaDAO.FabricarDAOAluno(); //new DAO_Aluno();
         }
 
         public Aluno CadastrarAluno(Aluno alu)
         {
-            alu = daoAluno.CadastrarAluno(alu);
+            if (alu.Telefone.Count() > 20)
+            {
+                alu.CodErro = -1;
+                alu.MensagemErro = "telefone inválido";
+            }
+            else
+            {
+                alu = daoAluno.CadastrarAluno(alu);
+            }
             return alu;
         }
 

@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace ApiRest.DAO_DAPPER
 {
-    public class DAO_Aluno
+    public class DAO_Aluno : IDAO_Aluno
     {
         
 
