@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CadAlunos", "CadAlunos\CadAlunos.csproj", "{7B59E119-249B-4403-B280-60C4A85889FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CadAlunos", "CadAlunos\CadAlunos.csproj", "{7B59E119-249B-4403-B280-60C4A85889FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PadraoFabrica", "PadraoFabrica\PadraoFabrica.csproj", "{584BB363-6850-4793-A9D0-F068F9616A46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PadraoFabrica", "PadraoFabrica\PadraoFabrica.csproj", "{584BB363-6850-4793-A9D0-F068F9616A46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
