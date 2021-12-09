@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace CadAlunos
 {
-    internal class NE_Aluno
+    public class NE_Aluno
     {
         public Aluno CadastrarAluno(Aluno alu)
         {
             if (alu == null)
             {
+                alu = new Aluno();
                 alu.CodErro = -1;
                 alu.MSGErro = "Erro aluno nulo não suportado";
             }
