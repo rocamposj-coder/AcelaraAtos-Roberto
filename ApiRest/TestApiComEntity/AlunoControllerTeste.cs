@@ -46,7 +46,7 @@ namespace TestApiComEntity
                 Assert.Fail();   
             }
             
-            var objeto = JsonConvert.DeserializeObject<List<Aluno>>(resultContent);
+            var objeto = JsonConvert.DeserializeObject<ResultViewModel<List<Aluno>>>(resultContent);
 
 
 
