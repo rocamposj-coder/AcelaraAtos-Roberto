@@ -71,7 +71,10 @@ namespace TestApiComEntity
             try
             {
 
+                StringContent content = new StringContent(jsonCorpo);
+                var response = _Client.PostAsync("/api/Aluno", content).GetAwaiter().GetResult();
 
+                /*
                 var request = new HttpRequestMessage
                 {
                     Method = HttpMethod.Post,
@@ -80,6 +83,7 @@ namespace TestApiComEntity
                 };
 
                 var response = await _Client.SendAsync(request).ConfigureAwait(false);
+                */
                 //response.EnsureSuccessStatusCode();
 
                 var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
