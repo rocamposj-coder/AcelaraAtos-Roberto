@@ -19,6 +19,10 @@ namespace TestApiComEntity
                .WithWebHostBuilder(builder =>
                {
                    // ... Configure test services
+                   builder.ConfigureServices(services =>
+                   {
+                       //services.AddSingleton<IHelloService, MockHelloService>();
+                   });
                });
 
             var _Client = application.CreateClient();

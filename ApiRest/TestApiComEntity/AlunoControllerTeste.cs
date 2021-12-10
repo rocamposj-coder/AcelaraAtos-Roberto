@@ -51,7 +51,7 @@ namespace TestApiComEntity
 
             var application = new WebApplicationFactory<Program>()
                .WithWebHostBuilder(builder =>
-               {
+               {                   
                     // ... Configure test services
                 });
 
@@ -74,8 +74,7 @@ namespace TestApiComEntity
                 };
 
                 var response = await _Client.SendAsync(request).ConfigureAwait(false);
-
-                //response.EnsureSuccessStatusCode(); //
+                               
 
                 var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
