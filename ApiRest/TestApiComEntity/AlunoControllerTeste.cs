@@ -35,9 +35,7 @@ namespace TestApiComEntity
                     // ... Configure test services
                 });
 
-            var _Client = application.CreateClient();
-
-            
+            var _Client = application.CreateClient();            
 
             var result = _Client.GetAsync("/api/Aluno").GetAwaiter().GetResult();
             var resultContent = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
@@ -47,20 +45,7 @@ namespace TestApiComEntity
                 Assert.Fail();   
             }
 
-            Retorno<List<Aluno>> resultViewModel = null;
-
-            try
-            {
-
-                resultViewModel = JsonConvert.DeserializeObject<Retorno<List<Aluno>>>(resultContent);
-
-                
-            }
-            catch(Exception e)
-            { 
-                string message = e.Message;
-            }
-
+            Retorno<List<Aluno>> resultViewModel = JsonConvert.DeserializeObject<Retorno<List<Aluno>>>(resultContent);
             Assert.AreNotEqual(0, resultViewModel?.Data.Count);
 
         }
