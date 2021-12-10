@@ -17,27 +17,25 @@ namespace TestApiComEntity
     [TestClass]
     public class AlunoControllerTeste
     {
-
-
         [TestMethod]
         [TestCategory("Controller")]
         public async Task AoRecuperarAlunos()
         {
 
             var application = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder =>
-                {
+               .WithWebHostBuilder(builder =>
+               {
                     // ... Configure test services
                 });
 
-            var _Client = application.CreateClient();            
+            var _Client = application.CreateClient();
 
             var result = _Client.GetAsync("/api/Aluno").GetAwaiter().GetResult();
             var resultContent = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
 
             if (result.StatusCode != HttpStatusCode.OK)
             {
-                Assert.Fail();   
+                Assert.Fail();
             }
 
             Retorno<List<Aluno>> resultViewModel = JsonConvert.DeserializeObject<Retorno<List<Aluno>>>(resultContent);
@@ -46,16 +44,14 @@ namespace TestApiComEntity
         }
 
 
-
-
         [TestMethod]
         [TestCategory("Controller")]
         public async Task AoInserirAluno()
         {
 
             var application = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder =>
-                {
+               .WithWebHostBuilder(builder =>
+               {
                     // ... Configure test services
                 });
 
@@ -69,7 +65,7 @@ namespace TestApiComEntity
 
 
             try
-            {  
+            {
                 var request = new HttpRequestMessage
                 {
                     Method = HttpMethod.Post,
@@ -78,8 +74,8 @@ namespace TestApiComEntity
                 };
 
                 var response = await _Client.SendAsync(request).ConfigureAwait(false);
-             
-                //response.EnsureSuccessStatusCode();
+
+                //response.EnsureSuccessStatusCode(); //
 
                 var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
@@ -90,11 +86,36 @@ namespace TestApiComEntity
                 }
 
                 Retorno<Aluno> resultViewModel = JsonConvert.DeserializeObject<Retorno<Aluno>>(responseBody);
-                Assert.AreNotEqual(0, resultViewModel?.Data.Id);
+                Assert.AreNotEqual(0, resultViewModel?.Erros.Count);
             }
             catch (Exception ex)
-            { 
-                string message = ex.Message;    
+            {
+                string message = ex.Message;
+            }
+
+        }
+
+
+
+        [TestMethod]
+        [TestCategory("Controller")]
+        public async Task AoInserirAlunoRefatorado()
+        {
+
+            EditorAlunoViewModel editorAluno = new EditorAlunoViewModel();
+            editorAluno.Nome = "Hercules";
+            editorAluno.Telefone = "123";
+
+            try
+            {
+                string uri = "https://localhost:7286/api/Aluno";
+                Retorno<Aluno> retorno = await UtilitarioTesteHTTP<EditorAlunoViewModel, Retorno<Aluno>>.HttpPostAsync(editorAluno, uri, HttpStatusCode.BadRequest);
+
+                Assert.AreNotEqual(0, retorno?.Erros.Count);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
             }
 
         }
