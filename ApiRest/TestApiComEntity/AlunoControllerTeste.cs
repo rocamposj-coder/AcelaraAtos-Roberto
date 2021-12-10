@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using System.Net;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System;
 
 namespace TestApiComEntity
 {
@@ -36,7 +37,7 @@ namespace TestApiComEntity
 
             var _Client = application.CreateClient();
 
-            //var result = await _Client.GetAsync("/api/Aluno");
+            
 
             var result = _Client.GetAsync("/api/Aluno").GetAwaiter().GetResult();
             var resultContent = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
@@ -45,12 +46,23 @@ namespace TestApiComEntity
             {
                 Assert.Fail();   
             }
-            
-            var objeto = JsonConvert.DeserializeObject<ResultViewModel<List<Aluno>>>(resultContent);
 
+            Retorno<List<Aluno>> resultViewModel = null;
 
+            try
+            {
 
-            Assert.AreNotEqual(0, 0);
+                resultViewModel = JsonConvert.DeserializeObject<Retorno<List<Aluno>>>(resultContent);
+
+                
+            }
+            catch(Exception e)
+            { 
+                string message = e.Message;
+            }
+
+            Assert.AreNotEqual(0, resultViewModel?.Data.Count);
+
         }
 
 

@@ -28,5 +28,10 @@
             Erros.Add(erro);
         }
 
+        public ResultViewModel()
+        {
+
+        }
+
     }
 }
