@@ -9,19 +9,14 @@ using System.Net;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System;
+using System.Text;
+
 
 namespace TestApiComEntity
 {
     [TestClass]
     public class AlunoControllerTeste
     {
-
-
-        
-            
-            
-            
-        
 
 
         [TestMethod]
@@ -50,6 +45,62 @@ namespace TestApiComEntity
 
         }
 
+
+
+
+        [TestMethod]
+        [TestCategory("Controller")]
+        public async Task AoInserirAluno()
+        {
+
+            var application = new WebApplicationFactory<Program>()
+                .WithWebHostBuilder(builder =>
+                {
+                    // ... Configure test services
+                });
+
+            var _Client = application.CreateClient();
+
+            EditorAlunoViewModel editorAluno = new EditorAlunoViewModel();
+            editorAluno.Nome = "Hercules";
+            editorAluno.Telefone = "123";
+
+            var jsonCorpo = JsonConvert.SerializeObject(editorAluno);
+
+
+            try
+            {
+
+
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    RequestUri = new Uri("https://localhost:7286/api/Aluno"),
+                    Content = new StringContent(jsonCorpo, Encoding.UTF8, "application/json"),
+                };
+
+                var response = await _Client.SendAsync(request).ConfigureAwait(false);
+                //response.EnsureSuccessStatusCode();
+
+                var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+
+
+
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    Assert.Fail();
+                }
+
+                Retorno<Aluno> resultViewModel = JsonConvert.DeserializeObject<Retorno<Aluno>>(responseBody);
+                Assert.AreNotEqual(0, resultViewModel?.Data.Id);
+            }
+            catch (Exception ex)
+            { 
+                string message = ex.Message;    
+            }
+
+        }
 
     }
 }
