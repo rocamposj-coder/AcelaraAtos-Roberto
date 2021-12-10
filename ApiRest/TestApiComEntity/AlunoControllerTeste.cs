@@ -5,6 +5,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
+using System.Net;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace TestApiComEntity
 {
@@ -33,11 +36,21 @@ namespace TestApiComEntity
 
             var _Client = application.CreateClient();
 
-            var httpResponse = await _Client.GetAsync("/api/Aluno");
-                                                              
+            //var result = await _Client.GetAsync("/api/Aluno");
+
+            var result = _Client.GetAsync("/api/Aluno").GetAwaiter().GetResult();
+            var resultContent = result.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+
+            if (result.StatusCode != HttpStatusCode.OK)
+            {
+                Assert.Fail();   
+            }
+            
+            var objeto = JsonConvert.DeserializeObject<List<Aluno>>(resultContent);
 
 
-        Assert.AreNotEqual(0, 0);
+
+            Assert.AreNotEqual(0, 0);
         }
 
 
