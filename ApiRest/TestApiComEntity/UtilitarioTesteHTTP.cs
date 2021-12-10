@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc.Testing;
+﻿using ApiComEntity.Models;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System;
@@ -20,7 +24,7 @@ namespace TestApiComEntity
                {
                    // ... Configure test services
                    builder.ConfigureServices(services =>
-                   {
+                   {                     
                        //services.AddSingleton<IHelloService, MockHelloService>();
                    });
                });
@@ -30,6 +34,7 @@ namespace TestApiComEntity
             return _Client;
         }
 
+               
         public static async Task<TipoRetorno> HttpPostAsync(TipoEnvio dadosEnvio, string uri, HttpStatusCode statusCodeEsperado) 
         {
             
