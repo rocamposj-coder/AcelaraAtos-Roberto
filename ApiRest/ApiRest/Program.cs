@@ -36,7 +36,9 @@ void LoadConfiguration(WebApplication app)
 
 void ConfigureAuthentication(WebApplicationBuilder builder)
 {
-    
+    //var key = Encoding.ASCII.GetBytes(Configuracao.JwtKey);
+    //var key = Encoding.ASCII.GetBytes(app.Configuration.GetValue<string>("JwtKey"));
+
     //Utilizado para autenticar
     builder.Services.AddAuthentication(x =>
     {
@@ -44,7 +46,7 @@ void ConfigureAuthentication(WebApplicationBuilder builder)
         x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     }).AddJwtBearer(x =>
     {
-        var key = Encoding.ASCII.GetBytes(Configuracao.JwtKey);
+        var key = Encoding.ASCII.GetBytes(Configuracao.JwtKey);        
 
         x.TokenValidationParameters = new TokenValidationParameters
         {
