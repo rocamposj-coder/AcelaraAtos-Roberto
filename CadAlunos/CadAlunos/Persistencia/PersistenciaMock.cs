@@ -10,7 +10,7 @@ namespace CadAlunos.Persistencia
     {
         public Aluno CadastrarAluno(Aluno alu)
         {
-            return alu;
+            return alu; //Não faz nada
         }
 
         public List<Aluno> ListarAlunos()

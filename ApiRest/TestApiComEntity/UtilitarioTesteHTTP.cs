@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,9 +26,12 @@ namespace TestApiComEntity
                    // ... Configure test services
                    builder.ConfigureServices(services =>
                    {                     
+                       
                        //services.AddSingleton<IHelloService, MockHelloService>();
                    });
                });
+
+            
 
             var _Client = application.CreateClient();
 
@@ -48,6 +52,9 @@ namespace TestApiComEntity
                 RequestUri = new Uri(uri),
                 Content = new StringContent(jsonCorpo, Encoding.UTF8, "application/json"),
             };
+              
+            //SE O CONSUMO PRECISAR ENVIAR O TOKEN
+            //_Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "Your Oauth token");
 
             var response = await _Client.SendAsync(request).ConfigureAwait(false);
 
@@ -60,9 +67,9 @@ namespace TestApiComEntity
                 Assert.Fail();
             }
 
-            TipoRetorno resultViewModel = JsonConvert.DeserializeObject<TipoRetorno>(responseBody);
+            TipoRetorno tipoRetorno = JsonConvert.DeserializeObject<TipoRetorno>(responseBody);
 
-            return resultViewModel;
+            return tipoRetorno;
         }
     }
 }
